@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta Cay · Web + Advertising · Workii Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --tierra:#2A1F17;
+    --tierra-2:#3D2E22;
+    --crema:#F5EFE6;
+    --crema-2:#EDE4D3;
+    --dorado:#C9A961;
+    --dorado-osc:#A88845;
+    --verde:#5C6B4A;
+    --verde-osc:#3D4A2E;
+    --gris:#7A6E62;
+    --gris-cl:#A89A8C;
+    --negro:#1A1410;
+    --blanco:#FFFEF9;
+    --azul:#4A6B7C;
+    --rojo:#C2452D;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Inter',-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+  html,body{background:var(--tierra);color:var(--crema);font-family:var(--sans);scroll-behavior:smooth}
+
+  /* === STUDIO BAR === */
+  .studio-bar{
+    position:sticky;top:0;z-index:100;
+    background:rgba(26,20,16,.94);backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(201,169,97,.15);
+    padding:14px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+  }
+  /* === LOGO DÍAZ.CO === */
+  .studio-logo{
+    display:flex;align-items:center;gap:14px;
+    font-family:var(--sans);
+  }
+  .studio-logo-svg{
+    width:54px;height:34px;flex-shrink:0;
+  }
+  .studio-logo-text{
+    display:flex;flex-direction:column;line-height:1;
+  }
+  .studio-logo-name{
+    font-size:14px;letter-spacing:3px;color:var(--crema);font-weight:700;
+    text-transform:uppercase;display:block;
+  }
+  /* Tagline se ajusta al ancho del nombre usando justify */
+  .studio-logo-tag{
+    font-size:8.5px;letter-spacing:.5px;color:var(--gris-cl);font-weight:500;
+    text-transform:uppercase;margin-top:6px;display:flex;justify-content:space-between;
+    width:100%;
+  }
+  body.theme-premium .studio-logo-name{color:var(--crema)}
+  body.theme-signature .studio-logo-name{color:var(--blanco)}
+  .nav-controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .nav-jump{display:flex;gap:8px}
+  .nav-jump a{
+    font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gris-cl);
+    padding:6px 12px;border:1px solid rgba(201,169,97,.2);border-radius:30px;
+    text-decoration:none;font-weight:600;
+  }
+  .nav-jump a:hover{color:var(--dorado);border-color:var(--dorado)}
+  .lang-switch{display:flex;background:rgba(201,169,97,.1);border:1px solid rgba(201,169,97,.25);border-radius:30px;padding:3px;gap:2px}
+  .lang-btn{
+    padding:7px 16px;font-size:11px;letter-spacing:1.5px;font-weight:600;
+    background:transparent;border:none;color:var(--gris-cl);cursor:pointer;border-radius:30px;
+    font-family:var(--sans);transition:all .25s;
+  }
+  .lang-btn.active{background:var(--dorado);color:var(--negro)}
+
+  [data-lang]{display:none}
+  [data-lang].show{display:block}
+  [data-lang-inline]{display:none}
+  [data-lang-inline].show{display:inline}
+
+  /* === HERO PREMIUM === */
+  .hero{
+    max-width:1200px;margin:0 auto;padding:80px 24px 64px;text-align:center;position:relative;
+  }
+  .hero::before{
+    content:"";position:absolute;top:-40px;left:50%;transform:translateX(-50%);
+    width:800px;height:400px;
+    background:radial-gradient(ellipse,rgba(201,169,97,.18),transparent 65%);
+    pointer-events:none;
+  }
+
+  /* Eyebrow sofisticado */
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:14px;
+    font-size:10px;letter-spacing:5px;text-transform:uppercase;
+    color:var(--dorado);margin-bottom:32px;font-weight:700;position:relative;
+  }
+  .hero-tag::before,.hero-tag::after{content:"";width:40px;height:1px;background:var(--dorado);opacity:.6}
+  .hero-tag i{
+    font-style:normal;width:6px;height:6px;border-radius:50%;background:var(--dorado);
+    box-shadow:0 0 12px rgba(201,169,97,.6);
+  }
+
+  /* H1 monumental */
+  .hero h1{
+    font-family:var(--serif);font-weight:300;
+    font-size:clamp(42px,7vw,82px);line-height:.95;letter-spacing:-.035em;
+    color:var(--crema);margin-bottom:28px;position:relative;
+  }
+  .hero h1 em{
+    font-style:italic;color:var(--dorado);font-weight:300;
+    text-shadow:0 0 40px rgba(201,169,97,.25);
+  }
+
+  /* Sub más elegante */
+  .hero > p{
+    font-size:16px;color:var(--gris-cl);max-width:580px;margin:0 auto;
+    line-height:1.75;position:relative;font-weight:300;
+    font-family:var(--serif);
+  }
+
+  /* Métricas pequeñas debajo del sub */
+  .hero-meta{
+    display:flex;justify-content:center;align-items:center;gap:40px;
+    margin-top:36px;padding-top:32px;border-top:1px solid rgba(201,169,97,.15);
+    max-width:520px;margin-left:auto;margin-right:auto;
+    flex-wrap:wrap;
+  }
+  .hero-meta-item{text-align:center;flex:0 0 auto}
+  .hero-meta-item b{
+    display:block;font-family:var(--serif);font-size:22px;color:var(--dorado);
+    font-weight:400;letter-spacing:-.02em;font-style:italic;line-height:1;margin-bottom:6px;
+  }
+  .hero-meta-item span{
+    font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gris-cl);font-weight:500;
+  }
+  .hero-meta-divider{width:1px;height:30px;background:rgba(201,169,97,.2)}
+  @media(max-width:680px){.hero-meta-divider{display:none}}
+
+  /* === SELECTOR PREMIUM === */
+  .plan-selector{
+    max-width:820px;margin:64px auto 0;display:grid;grid-template-columns:1fr 1fr;
+    gap:14px;padding:0;
+  }
+  @media(max-width:780px){.plan-selector{grid-template-columns:1fr;gap:12px}}
+
+  .plan-tab{
+    padding:24px 20px;font-family:var(--sans);
+    background:linear-gradient(180deg,rgba(245,239,230,.04) 0%,rgba(245,239,230,.01) 100%);
+    border:1px solid rgba(201,169,97,.18);border-radius:16px;
+    color:var(--gris-cl);cursor:pointer;
+    transition:all .4s cubic-bezier(.4,0,.2,1);text-align:center;line-height:1.3;
+    position:relative;overflow:hidden;
+  }
+  .plan-tab::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(201,169,97,.3),transparent);
+    opacity:0;transition:opacity .4s;
+  }
+  .plan-tab:hover::before{opacity:1}
+  .plan-tab:hover{
+    border-color:rgba(201,169,97,.4);
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(0,0,0,.3);
+  }
+
+  /* Tier label pequeño arriba */
+  .plan-tab .tier{
+    font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--dorado);
+    font-weight:700;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:8px;
+    opacity:.8;
+  }
+  .plan-tab .tier::before,.plan-tab .tier::after{
+    content:"";width:16px;height:1px;background:var(--dorado);opacity:.5;
+  }
+
+  /* Nombre del plan */
+  .plan-tab .name{
+    display:block;font-family:var(--serif);font-size:28px;
+    color:var(--crema);font-weight:400;letter-spacing:-.025em;line-height:1;
+    margin-bottom:4px;font-style:italic;
+  }
+  .plan-tab .duration{
+    display:block;font-size:9.5px;letter-spacing:2px;color:var(--gris);
+    text-transform:uppercase;font-weight:500;margin-bottom:18px;
+  }
+
+  /* Precio principal */
+  .plan-tab .price{
+    display:block;font-family:var(--serif);font-size:36px;
+    color:var(--crema);font-weight:300;letter-spacing:-.025em;line-height:1;
+    margin-bottom:14px;
+  }
+
+  /* Línea separadora */
+  .plan-tab .total{
+    display:block;font-size:10px;color:var(--gris-cl);letter-spacing:1.2px;font-weight:500;
+    padding-top:14px;border-top:1px solid rgba(201,169,97,.15);text-transform:none;line-height:1.5;
+  }
+  .plan-tab .total b{
+    font-family:var(--serif);font-size:14px;color:var(--dorado);font-weight:500;
+    letter-spacing:0;font-style:italic;display:block;margin-top:4px;
+  }
+
+  /* === ACTIVE STATES === */
+  .plan-tab.active{
+    background:linear-gradient(180deg,rgba(201,169,97,.18) 0%,rgba(201,169,97,.04) 100%);
+    border:1px solid var(--dorado);
+    box-shadow:
+      0 20px 60px rgba(201,169,97,.18),
+      inset 0 1px 0 rgba(255,255,255,.08);
+    transform:translateY(-2px);
+  }
+  .plan-tab.active::before{
+    opacity:1;
+    background:linear-gradient(90deg,transparent,var(--dorado),transparent);
+    height:2px;
+  }
+
+  /* Smart activo - elegante */
+  .plan-tab[data-plan="smart"].active .name{color:var(--crema)}
+  .plan-tab[data-plan="smart"].active .price{color:var(--crema)}
+
+  /* Avanzado activo - dorado intenso */
+  .plan-tab[data-plan="avanzado"].active{
+    background:linear-gradient(180deg,rgba(212,175,55,.22) 0%,rgba(212,175,55,.06) 100%);
+    border:1px solid #D4AF37;
+    box-shadow:
+      0 25px 70px rgba(212,175,55,.25),
+      inset 0 1px 0 rgba(255,255,255,.1);
+  }
+  .plan-tab[data-plan="avanzado"].active::before{background:linear-gradient(90deg,transparent,#D4AF37,transparent)}
+  .plan-tab[data-plan="avanzado"].active .name{
+    color:var(--crema);
+    text-shadow:0 0 20px rgba(212,175,55,.3);
+  }
+  .plan-tab[data-plan="avanzado"].active .price{color:var(--crema)}
+
+  /* Signature - Estilo trofeo siempre */
+  .plan-tab[data-plan="signature"]{
+    background:linear-gradient(180deg,rgba(0,0,0,.4) 0%,rgba(0,0,0,.2) 100%);
+    border:1px solid rgba(212,175,55,.3);
+  }
+  .plan-tab[data-plan="signature"]::after{
+    content:"★";position:absolute;top:14px;right:16px;font-size:11px;color:var(--dorado);
+    text-shadow:0 0 12px rgba(212,175,55,.5);
+  }
+  .plan-tab[data-plan="signature"] .name{color:var(--dorado);font-style:italic}
+  .plan-tab[data-plan="signature"] .sig-services{
+    display:block;font-size:9.5px;letter-spacing:.5px;color:var(--gris-cl);font-weight:400;
+    line-height:1.6;margin-bottom:14px;padding:10px 8px;
+    background:rgba(212,175,55,.05);border:1px dashed rgba(212,175,55,.2);border-radius:6px;
+    font-family:var(--serif);font-style:italic;
+  }
+  .plan-tab[data-plan="signature"].active .sig-services{
+    color:rgba(212,175,55,.9);background:rgba(212,175,55,.08);border-color:rgba(212,175,55,.3);
+  }
+  .plan-tab[data-plan="signature"] .price{
+    font-size:18px;font-style:italic;color:var(--dorado);font-weight:400;
+    letter-spacing:.5px;font-family:var(--serif);
+  }
+  .plan-tab[data-plan="signature"] .total b{color:var(--dorado)}
+
+  .plan-tab[data-plan="signature"].active{
+    background:linear-gradient(180deg,#0F0B07 0%,#000 100%);
+    border:1px solid #D4AF37;
+    box-shadow:
+      0 30px 80px rgba(212,175,55,.3),
+      inset 0 0 60px rgba(212,175,55,.1),
+      inset 0 1px 0 rgba(255,255,255,.05);
+  }
+  .plan-tab[data-plan="signature"].active::before{
+    background:linear-gradient(90deg,transparent,#D4AF37,transparent);height:2px;
+  }
+  .plan-tab[data-plan="signature"].active::after{
+    color:#D4AF37;font-size:14px;
+    text-shadow:0 0 20px rgba(212,175,55,.8);
+    animation:signature-pulse 2s ease-in-out infinite;
+  }
+  @keyframes signature-pulse{
+    0%,100%{opacity:.7;text-shadow:0 0 12px rgba(212,175,55,.5)}
+    50%{opacity:1;text-shadow:0 0 25px rgba(212,175,55,.9),0 0 40px rgba(212,175,55,.4)}
+  }
+
+  /* ========================================================== */
+  /* TEMA PREMIUM - Activo cuando se selecciona plan Avanzado    */
+  /* ========================================================== */
+  body{transition:background .6s ease}
+  body.theme-premium{
+    background:linear-gradient(180deg,#1A1410 0%,#0F0B07 100%);
+  }
+  body.theme-premium .studio-bar{
+    background:rgba(15,11,7,.96);
+    border-bottom:1px solid rgba(212,175,55,.3);
+  }
+  body.theme-premium{
+    --dorado:#D4AF37;
+    --dorado-osc:#B8941F;
+  }
+  /* Decoración premium - líneas finas en el borde */
+  body.theme-premium .parte{
+    border-bottom:1px solid rgba(212,175,55,.18);
+  }
+  body.theme-premium .parte-num{
+    border:2px solid var(--dorado);
+    box-shadow:0 0 30px rgba(212,175,55,.2),inset 0 0 20px rgba(212,175,55,.08);
+    background:rgba(212,175,55,.05);
+  }
+  body.theme-premium .embudo-stage{
+    border:1px solid rgba(212,175,55,.25);
+    box-shadow:0 8px 30px rgba(0,0,0,.3);
+  }
+  body.theme-premium .feat{
+    border:1px solid rgba(212,175,55,.2);
+    background:linear-gradient(180deg,rgba(212,175,55,.05) 0%,rgba(212,175,55,.01) 100%);
+  }
+  body.theme-premium .tech-list{
+    border:1px solid rgba(212,175,55,.25);
+    background:linear-gradient(180deg,rgba(212,175,55,.06) 0%,rgba(212,175,55,.02) 100%);
+  }
+  body.theme-premium .precio-block{
+    border:1px solid var(--dorado);
+    box-shadow:0 30px 80px rgba(212,175,55,.18),0 0 60px rgba(212,175,55,.08);
+  }
+  body.theme-premium .precio-r{
+    background:rgba(212,175,55,.12);
+    border:1px solid var(--dorado);
+  }
+  body.theme-premium .precio-total-box{
+    background:linear-gradient(135deg,rgba(212,175,55,.28),rgba(212,175,55,.12));
+    border:1px solid var(--dorado);
+    box-shadow:0 4px 20px rgba(212,175,55,.2);
+  }
+  body.theme-premium .proyec-clientes{
+    background:linear-gradient(135deg,rgba(184,148,31,.18) 0%,rgba(212,175,55,.12) 100%);
+    border:1px solid var(--dorado);
+    box-shadow:0 8px 40px rgba(212,175,55,.15);
+  }
+  body.theme-premium .ff-step.final{
+    background:rgba(212,175,55,.22);
+    border-color:var(--dorado);
+    box-shadow:0 0 30px rgba(212,175,55,.25);
+  }
+  body.theme-premium .cta-final{
+    border:1px solid var(--dorado);
+    box-shadow:0 30px 80px rgba(212,175,55,.18);
+  }
+  body.theme-premium .lang-btn.active{
+    background:var(--dorado);
+    box-shadow:0 4px 12px rgba(212,175,55,.3);
+  }
+  body.theme-premium .nav-jump a:hover{
+    color:var(--dorado);border-color:var(--dorado);
+  }
+  /* Badge premium aparece en hero */
+  .premium-badge{
+    display:none;align-items:center;gap:8px;
+    padding:6px 14px;background:linear-gradient(135deg,#D4AF37,#A88845);color:var(--negro);
+    border-radius:30px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;
+    margin-top:18px;box-shadow:0 4px 16px rgba(212,175,55,.3);
+  }
+  body.theme-premium .premium-badge{display:inline-flex}
+  .premium-badge::before{content:"★";font-size:14px}
+
+  /* TEMA SIGNATURE - lujo absoluto */
+  body.theme-signature{
+    background:linear-gradient(180deg,#0A0705 0%,#000 100%);
+    --dorado:#D4AF37;
+    --dorado-osc:#B8941F;
+  }
+  body.theme-signature .studio-bar{
+    background:rgba(0,0,0,.96);
+    border-bottom:1px solid rgba(212,175,55,.4);
+  }
+  body.theme-signature .hero h1 em{color:var(--dorado);text-shadow:0 0 30px rgba(212,175,55,.3)}
+
+  /* PLAN SIGNATURE - Layout especial */
+  .signature-hero{
+    margin-top:48px;padding:80px 32px;
+    background:
+      radial-gradient(ellipse at top,rgba(212,175,55,.18),transparent 60%),
+      linear-gradient(180deg,#1A1410 0%,#000 100%);
+    border:1px solid var(--dorado);border-radius:20px;
+    text-align:center;position:relative;overflow:hidden;
+  }
+  .signature-hero::before{
+    content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--dorado),transparent);
+  }
+  .signature-star{
+    display:inline-block;margin-bottom:18px;color:var(--dorado);
+    font-size:24px;letter-spacing:14px;
+    animation:shimmer 3s ease-in-out infinite;
+  }
+  @keyframes shimmer{
+    0%,100%{opacity:.6;text-shadow:0 0 10px rgba(212,175,55,.3)}
+    50%{opacity:1;text-shadow:0 0 25px rgba(212,175,55,.6),0 0 40px rgba(212,175,55,.3)}
+  }
+  .signature-tag{
+    display:inline-block;padding:8px 20px;
+    background:linear-gradient(135deg,rgba(212,175,55,.18),rgba(212,175,55,.08));
+    border:1px solid var(--dorado);
+    color:var(--dorado);font-size:10px;letter-spacing:4px;text-transform:uppercase;font-weight:700;
+    border-radius:30px;margin-bottom:20px;position:relative;
+  }
+  .signature-hero h2{
+    font-family:var(--serif);font-weight:300;
+    font-size:clamp(40px,6.5vw,68px);line-height:.98;letter-spacing:-.03em;
+    color:var(--crema);margin-bottom:20px;position:relative;
+  }
+  .signature-hero h2 em{
+    font-style:italic;color:var(--dorado);font-weight:300;
+    text-shadow:0 0 30px rgba(212,175,55,.4);
+  }
+  .signature-hero > p{
+    font-size:16px;color:var(--gris-cl);max-width:680px;margin:0 auto 32px;line-height:1.7;
+    position:relative;font-weight:300;
+  }
+
+  /* Stat principal del plan Signature */
+  .signature-impact{
+    margin:32px auto;max-width:680px;padding:32px;
+    background:linear-gradient(135deg,rgba(212,175,55,.15),rgba(212,175,55,.04));
+    border:1px solid var(--dorado);border-radius:16px;
+    position:relative;
+  }
+  .signature-impact-label{
+    font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dorado);font-weight:700;margin-bottom:10px;
+  }
+  .signature-impact-num{
+    font-family:var(--serif);font-size:clamp(60px,9vw,90px);
+    color:var(--dorado);font-weight:300;letter-spacing:-.04em;line-height:1;font-style:italic;
+    text-shadow:0 0 40px rgba(212,175,55,.4);
+    margin-bottom:10px;
+  }
+  .signature-impact-desc{
+    font-size:14px;color:var(--crema);line-height:1.6;font-family:var(--serif);font-style:italic;font-weight:300;
+  }
+  .signature-impact-desc b{color:var(--dorado);font-weight:500}
+
+  /* Que incluye Signature */
+  .signature-deliverables{
+    max-width:1100px;margin:48px auto;padding:0 24px;
+    display:grid;grid-template-columns:repeat(2,1fr);gap:20px;
+  }
+  @media(max-width:780px){.signature-deliverables{grid-template-columns:1fr}}
+  .sig-block{
+    padding:32px;background:linear-gradient(180deg,rgba(212,175,55,.06) 0%,rgba(212,175,55,.01) 100%);
+    border:1px solid rgba(212,175,55,.25);border-radius:14px;position:relative;
+  }
+  .sig-block-icon{
+    width:48px;height:48px;border-radius:50%;
+    background:linear-gradient(135deg,rgba(212,175,55,.2),rgba(212,175,55,.05));
+    border:1px solid var(--dorado);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:22px;color:var(--dorado);font-style:italic;font-weight:400;
+    margin-bottom:18px;
+  }
+  .sig-block h3{
+    font-family:var(--serif);font-size:22px;color:var(--crema);font-weight:500;
+    margin-bottom:8px;letter-spacing:-.01em;line-height:1.1;
+  }
+  .sig-block h3 em{font-style:italic;color:var(--dorado);font-weight:400}
+  .sig-block-tag{
+    font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--dorado);
+    font-weight:700;margin-bottom:14px;display:block;
+  }
+  .sig-block ul{list-style:none}
+  .sig-block li{
+    font-size:13px;color:var(--crema);padding:9px 0 9px 22px;position:relative;line-height:1.55;
+    border-bottom:1px dashed rgba(212,175,55,.12);
+  }
+  .sig-block li:last-child{border-bottom:none}
+  .sig-block li::before{
+    content:"✦";position:absolute;left:0;top:9px;color:var(--dorado);font-size:11px;
+  }
+  .sig-block li b{color:var(--dorado);font-family:var(--serif);font-style:italic;font-weight:500}
+
+  /* Trip viaje a Mallorca - destacado */
+  .signature-trip{
+    max-width:1100px;margin:48px auto;padding:48px 32px;
+    background:
+      linear-gradient(180deg,rgba(0,0,0,.6) 0%,rgba(26,20,16,.8) 100%),
+      linear-gradient(135deg,#5C6B4A 0%,#3D4A2E 100%);
+    border:1px solid var(--dorado);border-radius:18px;
+    position:relative;overflow:hidden;
+  }
+  .signature-trip::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 30% 50%,rgba(212,175,55,.15),transparent 60%);
+  }
+  .signature-trip-tag{
+    display:inline-block;padding:5px 14px;background:var(--dorado);color:var(--negro);
+    font-size:9px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;
+    border-radius:30px;margin-bottom:18px;position:relative;
+  }
+  .signature-trip h3{
+    font-family:var(--serif);font-size:32px;color:var(--blanco);font-weight:400;
+    letter-spacing:-.025em;line-height:1.05;margin-bottom:14px;position:relative;
+  }
+  .signature-trip h3 em{font-style:italic;color:var(--dorado);font-weight:300}
+  .signature-trip > p{
+    font-size:14px;color:rgba(255,254,249,.8);line-height:1.7;max-width:640px;
+    margin-bottom:24px;position:relative;
+  }
+  .signature-trip-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:14px;position:relative;
+  }
+  @media(max-width:780px){.signature-trip-grid{grid-template-columns:1fr}}
+  .signature-trip-item{
+    padding:18px;background:rgba(0,0,0,.4);border:1px solid rgba(212,175,55,.2);
+    border-radius:10px;backdrop-filter:blur(10px);
+  }
+  .signature-trip-item b{
+    display:block;font-family:var(--serif);font-size:15px;color:var(--dorado);
+    margin-bottom:6px;font-weight:500;font-style:italic;
+  }
+  .signature-trip-item span{font-size:12px;color:rgba(255,254,249,.7);line-height:1.55}
+
+  /* Resultado proyectado Signature */
+  .signature-results{
+    max-width:1100px;margin:48px auto;padding:48px 32px;
+    background:linear-gradient(135deg,rgba(212,175,55,.18),rgba(212,175,55,.06));
+    border:1px solid var(--dorado);border-radius:18px;text-align:center;
+    box-shadow:0 30px 80px rgba(212,175,55,.18);
+  }
+  .signature-results-tag{
+    font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dorado);
+    font-weight:700;margin-bottom:14px;
+  }
+  .signature-results h3{
+    font-family:var(--serif);font-size:28px;color:var(--crema);font-weight:400;
+    margin-bottom:24px;letter-spacing:-.02em;line-height:1.1;
+  }
+  .signature-results h3 em{font-style:italic;color:var(--dorado);font-weight:300}
+  .signature-results-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;
+  }
+  @media(max-width:780px){.signature-results-grid{grid-template-columns:repeat(2,1fr)}}
+  .signature-results-item{
+    padding:20px;background:rgba(0,0,0,.4);border-radius:12px;
+    border:1px solid rgba(212,175,55,.25);
+  }
+  .signature-results-item b{
+    display:block;font-family:var(--serif);font-size:32px;color:var(--dorado);
+    font-weight:400;letter-spacing:-.02em;margin-bottom:4px;line-height:1;
+  }
+  .signature-results-item small{
+    display:block;font-size:9px;color:var(--gris-cl);letter-spacing:1.5px;
+    text-transform:uppercase;line-height:1.3;
+  }
+
+  /* Precio bajo demanda */
+  .signature-pricing{
+    max-width:1100px;margin:48px auto;padding:48px 40px;
+    background:linear-gradient(135deg,#000 0%,#0F0B07 100%);
+    border:1px solid var(--dorado);border-radius:18px;
+    text-align:center;position:relative;overflow:hidden;
+  }
+  .signature-pricing::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at center,rgba(212,175,55,.12),transparent 60%);
+  }
+  .signature-pricing-tag{
+    font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--dorado);
+    font-weight:700;margin-bottom:16px;position:relative;
+  }
+  .signature-pricing h3{
+    font-family:var(--serif);font-size:36px;color:var(--crema);font-weight:300;
+    letter-spacing:-.025em;line-height:1.05;margin-bottom:14px;position:relative;
+  }
+  .signature-pricing h3 em{font-style:italic;color:var(--dorado);font-weight:300}
+  .signature-pricing p{
+    font-size:14px;color:var(--gris-cl);max-width:560px;margin:0 auto 24px;
+    line-height:1.7;position:relative;
+  }
+  .signature-pricing-cta{
+    display:inline-block;padding:16px 32px;
+    background:linear-gradient(135deg,var(--dorado),#A88845);color:var(--negro);
+    font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;
+    border-radius:3px;text-decoration:none;position:relative;
+    box-shadow:0 8px 30px rgba(212,175,55,.35);
+    transition:transform .25s;
+  }
+  .signature-pricing-cta:hover{transform:translateY(-2px)}
+  .parte{
+    max-width:1200px;margin:0 auto;padding:64px 24px;
+    border-bottom:1px dashed rgba(201,169,97,.15);
+    position:relative;
+  }
+  /* Diferenciación temática: WEB vs ADS */
+  .parte.parte-web{
+    background:linear-gradient(180deg,rgba(168,136,69,.04) 0%,transparent 60%);
+  }
+  .parte.parte-web::before{
+    content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:120px;height:3px;background:linear-gradient(90deg,transparent,#C9A961,transparent);
+    border-radius:3px;
+  }
+  .parte.parte-ads{
+    background:linear-gradient(180deg,rgba(201,169,97,.05) 0%,transparent 60%);
+  }
+  .parte.parte-ads::before{
+    content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:120px;height:3px;background:linear-gradient(90deg,transparent,var(--dorado),transparent);
+    border-radius:3px;
+  }
+  /* Numero Parte */
+  .parte.parte-web .parte-num{
+    border-color:#C9A961;color:#D4BC8A;
+    background:rgba(168,136,69,.08);
+  }
+  .parte.parte-ads .parte-num{
+    border-color:var(--dorado);color:var(--dorado);
+    background:rgba(201,169,97,.08);
+  }
+  /* Tag de la parte */
+  .parte.parte-web .parte-tag{color:#D4BC8A}
+  .parte.parte-web .parte-tag::before{background:#C9A961}
+  .parte.parte-ads .parte-tag{color:var(--dorado)}
+  .parte.parte-ads .parte-tag::before{background:var(--dorado)}
+  /* Subseccion numero */
+  .parte.parte-web .subsec-h-num{
+    background:rgba(168,136,69,.15);color:#D4BC8A;
+  }
+  .parte.parte-web .subsec-h{border-bottom-color:rgba(201,169,97,.2)}
+  .parte.parte-web h2 em{color:#D4BC8A}
+  .parte.parte-web .subsec-h h3 em{color:#D4BC8A}
+
+  .parte-head{margin-bottom:48px;display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap}
+  .parte-num{
+    width:64px;height:64px;border-radius:50%;border:2px solid var(--dorado);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    font-family:var(--serif);font-size:28px;color:var(--dorado);font-style:italic;font-weight:400;
+  }
+  .parte-head-text{flex:1}
+  .parte-tag{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:10px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--dorado);margin-bottom:10px;font-weight:600;
+  }
+  .parte-tag::before{content:"";width:24px;height:1px;background:var(--dorado)}
+  .parte h2{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(28px,4.5vw,42px);line-height:1.05;letter-spacing:-.02em;
+    color:var(--crema);margin-bottom:12px;
+  }
+  .parte h2 em{font-style:italic;color:var(--dorado);font-weight:300}
+  .parte-sub{font-size:15px;color:var(--gris-cl);max-width:720px;line-height:1.65}
+
+  /* === SUBSECCIÓN === */
+  .subsec{margin-bottom:40px}
+  .subsec-h{
+    display:flex;align-items:center;gap:12px;margin-bottom:18px;
+    padding-bottom:14px;border-bottom:1px solid rgba(201,169,97,.15);
+  }
+  .subsec-h-num{
+    width:30px;height:30px;border-radius:50%;background:rgba(201,169,97,.12);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:14px;color:var(--dorado);font-weight:600;flex-shrink:0;
+  }
+  .subsec-h h3{font-family:var(--serif);font-size:22px;color:var(--crema);font-weight:500;letter-spacing:-.01em;line-height:1.1}
+  .subsec-h h3 em{font-style:italic;color:var(--dorado);font-weight:400}
+
+  /* === FEATURES GRID === */
+  .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+  @media(max-width:780px){.feat-grid{grid-template-columns:1fr}}
+  .feat{
+    padding:18px;background:rgba(245,239,230,.03);
+    border:1px solid rgba(201,169,97,.15);border-radius:10px;
+  }
+  .feat-icon{
+    width:34px;height:34px;border-radius:8px;background:rgba(201,169,97,.12);
+    display:flex;align-items:center;justify-content:center;margin-bottom:12px;
+    font-family:var(--serif);font-size:14px;color:var(--dorado);font-weight:600;font-style:italic;
+  }
+  .feat h4{font-family:var(--serif);font-size:15px;color:var(--crema);font-weight:500;margin-bottom:6px;letter-spacing:-.01em}
+  .feat p{font-size:12.5px;color:var(--gris-cl);line-height:1.55}
+  .feat p b{color:var(--dorado);font-family:var(--serif);font-style:italic;font-weight:500}
+
+  /* === LISTA TÉCNICA === */
+  .tech-list{
+    background:linear-gradient(180deg,rgba(245,239,230,.04) 0%,rgba(245,239,230,.01) 100%);
+    border:1px solid rgba(201,169,97,.2);border-radius:12px;padding:24px;margin-top:18px;
+  }
+  .tech-list-h{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--dorado);margin-bottom:14px;font-weight:700}
+  .tech-list ul{list-style:none}
+  .tech-list li{
+    font-size:13px;color:var(--crema);padding:9px 0 9px 22px;position:relative;line-height:1.5;
+    border-bottom:1px dashed rgba(201,169,97,.1);
+  }
+  .tech-list li:last-child{border-bottom:none}
+  .tech-list li::before{
+    content:"";position:absolute;left:0;top:14px;width:8px;height:8px;
+    border-right:1.5px solid var(--dorado);border-bottom:1.5px solid var(--dorado);
+    transform:rotate(45deg);
+  }
+  .tech-list li b{color:var(--dorado);font-family:var(--serif);font-style:italic;font-weight:500}
+
+  /* === EMBUDO === */
+  .embudo-wrap{margin-top:24px}
+  .embudo-stage{
+    background:linear-gradient(180deg,rgba(245,239,230,.04) 0%,rgba(245,239,230,.01) 100%);
+    border:1px solid rgba(201,169,97,.2);border-radius:14px;padding:24px;margin-bottom:14px;
+  }
+  .embudo-stage.tofu{border-left:4px solid #5C6B4A}
+  .embudo-stage.mofu{border-left:4px solid var(--dorado)}
+  .embudo-stage.bofu{border-left:4px solid var(--rojo)}
+  .embudo-head-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;gap:10px}
+  .embudo-tier{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:700;
+  }
+  .tofu .embudo-tier{color:#8FA67A}
+  .mofu .embudo-tier{color:var(--dorado)}
+  .bofu .embudo-tier{color:#E27C68}
+  .embudo-tier i{
+    width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:13px;font-style:italic;
+  }
+  .tofu .embudo-tier i{background:rgba(92,107,74,.2);color:#8FA67A}
+  .mofu .embudo-tier i{background:rgba(201,169,97,.2);color:var(--dorado)}
+  .bofu .embudo-tier i{background:rgba(194,69,45,.2);color:#E27C68}
+  .embudo-budget{font-size:10px;color:var(--gris-cl);letter-spacing:1.5px;text-transform:uppercase}
+  .embudo-budget b{color:var(--crema);font-family:var(--serif);font-size:13px;font-weight:500;letter-spacing:0;text-transform:none}
+  .embudo-h{font-family:var(--serif);font-size:18px;color:var(--crema);font-weight:500;margin-bottom:6px;letter-spacing:-.01em}
+  .embudo-h em{font-style:italic;color:var(--dorado)}
+  .embudo-obj{font-size:12.5px;color:var(--gris-cl);margin-bottom:14px;line-height:1.55}
+  .embudo-obj b{color:var(--dorado);font-family:var(--serif);font-style:italic;font-weight:500}
+  .embudo-tactics{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:10px;
+  }
+  @media(max-width:680px){.embudo-tactics{grid-template-columns:1fr}}
+  .embudo-tac{padding:12px;background:rgba(0,0,0,.2);border-radius:6px}
+  .embudo-tac h6{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dorado);font-weight:700;margin-bottom:6px}
+  .embudo-tac p{font-size:11.5px;color:var(--crema);line-height:1.5}
+  .embudo-kpi{
+    margin-top:12px;padding-top:10px;border-top:1px dashed rgba(201,169,97,.2);
+    font-size:11px;color:var(--gris-cl);
+  }
+  .embudo-kpi b{color:var(--dorado);font-weight:600}
+
+  /* === PROYECCIÓN CLIENTES (LO IMPORTANTE) === */
+  .proyec-clientes{
+    margin-top:32px;padding:32px;
+    background:linear-gradient(135deg,rgba(92,107,74,.18) 0%,rgba(201,169,97,.1) 100%);
+    border:1px solid var(--dorado);border-radius:16px;
+  }
+  .proyec-clientes h3{
+    font-family:var(--serif);font-size:24px;color:var(--crema);margin-bottom:6px;font-weight:500;letter-spacing:-.01em;
+  }
+  .proyec-clientes h3 em{font-style:italic;color:var(--dorado)}
+  .proyec-clientes > p{font-size:13px;color:var(--gris-cl);margin-bottom:24px;line-height:1.6;max-width:700px}
+
+  .funnel-flow{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:center;margin-bottom:24px;
+  }
+  @media(max-width:780px){.funnel-flow{grid-template-columns:1fr;gap:14px}}
+  .ff-step{
+    padding:18px 12px;background:rgba(0,0,0,.3);border:1px solid rgba(201,169,97,.2);border-radius:10px;
+    text-align:center;position:relative;
+  }
+  .ff-step.final{background:rgba(201,169,97,.18);border-color:var(--dorado)}
+  .ff-step .num{font-family:var(--serif);font-size:26px;color:var(--crema);font-weight:500;letter-spacing:-.02em;display:block;line-height:1}
+  .ff-step.final .num{color:var(--dorado)}
+  .ff-step .label{font-size:9px;color:var(--gris-cl);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-top:6px;line-height:1.3}
+  .ff-step .pct{
+    position:absolute;top:6px;right:8px;font-size:9px;color:var(--dorado);
+    background:rgba(201,169,97,.15);padding:2px 6px;border-radius:20px;font-weight:700;
+  }
+  .ff-arrow{color:var(--dorado);font-size:14px;opacity:.5;text-align:center}
+  @media(max-width:780px){.ff-arrow{transform:rotate(90deg)}}
+
+  .proyec-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+  }
+  @media(max-width:780px){.proyec-grid{grid-template-columns:1fr}}
+  .proyec-item{
+    padding:20px;background:rgba(0,0,0,.3);border-radius:10px;
+    border:1px solid rgba(201,169,97,.15);
+  }
+  .proyec-item-h{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dorado);font-weight:700;margin-bottom:10px}
+  .proyec-item-num{font-family:var(--serif);font-size:36px;color:var(--crema);font-weight:400;letter-spacing:-.02em;line-height:1;display:block;margin-bottom:6px}
+  .proyec-item-num em{font-style:italic;color:var(--dorado);font-weight:300}
+  .proyec-item-desc{font-size:11.5px;color:var(--gris-cl);line-height:1.5}
+  .proyec-item-desc b{color:var(--crema);font-weight:600}
+
+  /* === PLAN VIEW (HIDE/SHOW) === */
+  .plan-view{display:none}
+  .plan-view.active{display:block}
+
+  /* === MOCKUP REELS === */
+  .reels-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px;
+  }
+  @media(max-width:780px){.reels-grid{grid-template-columns:1fr}}
+  .reel{
+    aspect-ratio:9/16;border-radius:14px;overflow:hidden;
+    background:linear-gradient(180deg,#5C6B4A 0%,#3D4A2E 60%,#2A1F17 100%);
+    position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:18px;
+    border:1px solid rgba(201,169,97,.2);
+  }
+  .reel.r2{background:linear-gradient(180deg,#A88845 0%,#3D2E22 60%,#1A1410 100%)}
+  .reel.r3{background:linear-gradient(180deg,#3D4A2E 0%,#2A1F17 50%,#000 100%)}
+  .reel::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 30% 30%,rgba(201,169,97,.18),transparent 50%);
+    pointer-events:none;
+  }
+  .reel-tag{
+    align-self:flex-start;background:rgba(201,169,97,.9);color:var(--negro);
+    padding:4px 10px;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border-radius:3px;position:relative;
+  }
+  .reel-content{position:relative}
+  .reel-lang{
+    font-size:9px;color:var(--dorado);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:6px;
+  }
+  .reel-title{
+    font-family:var(--serif);font-size:18px;color:var(--blanco);font-weight:400;line-height:1.15;letter-spacing:-.01em;margin-bottom:8px;
+  }
+  .reel-title em{font-style:italic;color:var(--dorado);font-weight:300}
+  .reel-desc{font-size:10px;color:rgba(245,239,230,.75);line-height:1.5;margin-bottom:10px}
+  .reel-meta{
+    display:flex;justify-content:space-between;font-size:9px;color:rgba(245,239,230,.5);
+    padding-top:8px;border-top:1px solid rgba(201,169,97,.25);
+  }
+
+  /* === POSTS GRID === */
+  .posts-grid{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:18px;
+  }
+  @media(max-width:680px){.posts-grid{grid-template-columns:repeat(3,1fr)}}
+  .post{
+    aspect-ratio:1;border-radius:6px;background:linear-gradient(135deg,var(--verde),var(--verde-osc));
+    position:relative;overflow:hidden;
+  }
+  .post:nth-child(2){background:linear-gradient(135deg,var(--dorado-osc),var(--tierra))}
+  .post:nth-child(3){background:linear-gradient(135deg,#8B7355,#5C4A3A)}
+  .post:nth-child(4){background:linear-gradient(135deg,var(--verde-osc),var(--negro))}
+  .post:nth-child(5){background:linear-gradient(135deg,var(--dorado),var(--dorado-osc))}
+  .post:nth-child(6){background:linear-gradient(135deg,var(--tierra),var(--negro))}
+  .post:nth-child(7){background:linear-gradient(135deg,#5C4A3A,#3D2E22)}
+  .post:nth-child(8){background:linear-gradient(135deg,var(--verde),#3D4A2E)}
+  .post:nth-child(9){background:linear-gradient(135deg,var(--dorado-osc),var(--verde-osc))}
+  .post:nth-child(10){background:linear-gradient(135deg,#A88845,#5C4A3A)}
+  .post:nth-child(11){background:linear-gradient(135deg,var(--tierra-2),var(--negro))}
+  .post:nth-child(12){background:linear-gradient(135deg,var(--verde-osc),var(--tierra))}
+  .post:nth-child(13){background:linear-gradient(135deg,#8B7355,var(--negro))}
+  .post:nth-child(14){background:linear-gradient(135deg,var(--dorado),var(--tierra-2))}
+  .post:nth-child(15){background:linear-gradient(135deg,#3D4A2E,#1A1410)}
+  .post::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 30% 30%,rgba(201,169,97,.2),transparent 60%);
+  }
+  .post-num{
+    position:absolute;bottom:4px;right:6px;font-size:9px;color:rgba(255,255,255,.6);
+    font-family:var(--serif);font-style:italic;font-weight:500;
+  }
+  .post-tag{
+    position:absolute;top:6px;left:6px;font-size:7px;color:var(--blanco);
+    background:rgba(0,0,0,.5);padding:2px 5px;border-radius:3px;letter-spacing:.5px;
+    text-transform:uppercase;font-weight:600;
+  }
+
+  /* === RESUMEN TÉCNICO ENTREGABLES === */
+  .resumen-tec{
+    margin-top:48px;padding:36px 32px;
+    background:linear-gradient(180deg,rgba(245,239,230,.04) 0%,rgba(245,239,230,.01) 100%);
+    border:1px solid rgba(201,169,97,.2);border-radius:14px;
+  }
+  .resumen-tec-head{
+    display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;flex-wrap:wrap;gap:14px;
+    padding-bottom:18px;border-bottom:1px solid rgba(201,169,97,.15);
+  }
+  .resumen-tec-head h3{
+    font-family:var(--serif);font-size:24px;color:var(--crema);font-weight:500;letter-spacing:-.01em;line-height:1.1;
+  }
+  .resumen-tec-head h3 em{font-style:italic;color:var(--dorado);font-weight:400}
+  .resumen-tec-head .badge{
+    font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dorado);font-weight:700;
+    padding:6px 12px;border:1px solid var(--dorado);border-radius:30px;
+  }
+
+  .resumen-tec-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:20px;
+  }
+  @media(max-width:780px){.resumen-tec-grid{grid-template-columns:1fr}}
+  .resumen-tec-col h5{
+    font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
+    margin-bottom:14px;font-weight:700;display:flex;align-items:center;gap:8px;
+    padding-bottom:10px;border-bottom:1px dashed rgba(201,169,97,.2);
+  }
+  .resumen-tec-col h5::before{
+    content:"";width:8px;height:8px;border-radius:50%;
+  }
+  .resumen-tec-col.web h5{color:#D4BC8A}
+  .resumen-tec-col.web h5::before{background:#C9A961}
+  .resumen-tec-col.ads h5{color:var(--dorado)}
+  .resumen-tec-col.ads h5::before{background:var(--dorado)}
+
+  .resumen-tec-col ul{list-style:none}
+  .resumen-tec-col li{
+    font-size:12px;color:var(--crema);padding:7px 0 7px 18px;position:relative;line-height:1.5;
+  }
+  .resumen-tec-col li::before{
+    content:"→";position:absolute;left:0;top:7px;color:var(--dorado);font-weight:700;font-size:11px;
+  }
+  .resumen-tec-col.web li::before{color:#D4BC8A}
+  .resumen-tec-col li b{color:var(--dorado);font-family:var(--serif);font-style:italic;font-weight:500}
+  .resumen-tec-col.web li b{color:#E8D9B5}
+
+  /* === COMPARATIVA SMART VS AVANZADO === */
+  .versus{
+    max-width:1200px;margin:64px auto;padding:48px 32px;
+    background:linear-gradient(135deg,var(--tierra) 0%,var(--negro) 100%);
+    border:1px solid rgba(201,169,97,.3);border-radius:18px;
+    position:relative;overflow:hidden;
+  }
+  .versus::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 0%,rgba(201,169,97,.1),transparent 60%);
+  }
+  .versus-head{text-align:center;margin-bottom:36px;position:relative}
+  .versus-tag{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:10px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--dorado);margin-bottom:14px;font-weight:600;
+  }
+  .versus-tag::before,.versus-tag::after{content:"";width:32px;height:1px;background:var(--dorado)}
+  .versus h2{
+    font-family:var(--serif);font-weight:400;font-size:clamp(28px,4vw,38px);
+    line-height:1.05;letter-spacing:-.02em;color:var(--crema);margin-bottom:10px;
+  }
+  .versus h2 em{font-style:italic;color:var(--dorado);font-weight:300}
+  .versus-head p{font-size:14px;color:var(--gris-cl);max-width:600px;margin:0 auto;line-height:1.6}
+
+  .versus-grid{
+    display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:stretch;position:relative;
+  }
+  @media(max-width:780px){
+    .versus-grid{grid-template-columns:1fr;gap:14px}
+    .versus-vs{display:none}
+  }
+  .versus-card{
+    padding:28px 24px;border-radius:14px;
+    background:linear-gradient(180deg,rgba(245,239,230,.04) 0%,rgba(245,239,230,.01) 100%);
+    border:1px solid rgba(201,169,97,.2);
+  }
+  .versus-card.smart{
+    border:1px solid rgba(201,169,97,.4);
+    background:linear-gradient(180deg,rgba(168,136,69,.08) 0%,rgba(168,136,69,.02) 100%);
+  }
+  .versus-card.avanzado{
+    border:1px solid var(--dorado);
+    background:linear-gradient(180deg,rgba(201,169,97,.12) 0%,rgba(201,169,97,.03) 100%);
+    box-shadow:0 20px 60px rgba(201,169,97,.18);
+  }
+  .versus-card-head{
+    padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid rgba(201,169,97,.15);
+  }
+  .versus-card.smart .versus-card-head{border-bottom-color:rgba(201,169,97,.3)}
+  .versus-card-tier{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;margin-bottom:6px}
+  .versus-card.smart .versus-card-tier{color:#D4BC8A}
+  .versus-card.avanzado .versus-card-tier{color:var(--dorado)}
+  .versus-card-name{font-family:var(--serif);font-size:24px;color:var(--crema);font-weight:400;letter-spacing:-.02em}
+  .versus-card-name em{font-style:italic;color:var(--dorado);font-weight:300}
+  .versus-card.smart .versus-card-name em{color:#D4BC8A}
+  .versus-card-price{
+    margin-top:10px;font-family:var(--serif);font-size:32px;color:var(--crema);font-weight:400;letter-spacing:-.02em;line-height:1;
+  }
+  .versus-card-price small{font-size:11px;color:var(--gris-cl);font-family:var(--sans);font-weight:400;display:block;margin-top:6px;letter-spacing:1px;text-transform:uppercase}
+
+  .versus-card-stats{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px;
+  }
+  .versus-card-stat{
+    padding:12px;background:rgba(0,0,0,.25);border-radius:8px;text-align:center;
+  }
+  .versus-card-stat b{display:block;font-family:var(--serif);font-size:22px;font-weight:500;letter-spacing:-.01em;line-height:1;margin-bottom:4px}
+  .versus-card.smart .versus-card-stat b{color:#E8D9B5}
+  .versus-card.avanzado .versus-card-stat b{color:var(--dorado)}
+  .versus-card-stat span{font-size:9px;color:var(--gris-cl);letter-spacing:1.2px;text-transform:uppercase;line-height:1.3;display:block}
+
+  .versus-card ul{list-style:none}
+  .versus-card li{
+    font-size:12px;color:var(--crema);padding:7px 0 7px 18px;position:relative;line-height:1.5;
+    border-bottom:1px dashed rgba(201,169,97,.1);
+  }
+  .versus-card li:last-child{border-bottom:none}
+  .versus-card li::before{
+    content:"";position:absolute;left:0;top:11px;width:7px;height:7px;
+    border-right:1.5px solid var(--dorado);border-bottom:1.5px solid var(--dorado);
+    transform:rotate(45deg);
+  }
+  .versus-card.smart li::before{border-color:#D4BC8A}
+  .versus-card li b{color:var(--dorado);font-family:var(--serif);font-style:italic;font-weight:500}
+  .versus-card.smart li b{color:#E8D9B5}
+
+  .versus-card-prob{
+    margin-top:18px;padding:14px;text-align:center;border-radius:10px;
+    background:rgba(0,0,0,.3);
+  }
+  .versus-card-prob span{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gris-cl);font-weight:600;display:block;margin-bottom:6px}
+  .versus-card-prob b{font-family:var(--serif);font-size:30px;font-weight:400;letter-spacing:-.02em;line-height:1;font-style:italic}
+  .versus-card.smart .versus-card-prob b{color:#E8D9B5}
+  .versus-card.avanzado .versus-card-prob b{color:var(--dorado)}
+
+  .versus-vs{
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:24px;color:var(--dorado);font-style:italic;
+    width:60px;
+  }
+
+  .versus-recommendation{
+    margin-top:32px;padding:22px;text-align:center;
+    background:linear-gradient(135deg,rgba(201,169,97,.12),rgba(201,169,97,.04));
+    border:1px solid var(--dorado);border-radius:12px;position:relative;
+  }
+  .versus-recommendation p{
+    font-size:14px;color:var(--crema);line-height:1.6;font-family:var(--serif);font-style:italic;
+  }
+  .versus-recommendation p b{color:var(--dorado);font-style:normal;font-weight:600}
+
+  /* === ESTRATEGIA SIMPLIFICADA - Layout horizontal con flujo === */
+  .strat-simple{
+    display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;margin-top:24px;align-items:stretch;
+  }
+  @media(max-width:880px){
+    .strat-simple{grid-template-columns:1fr;gap:24px}
+  }
+  .strat-step{
+    padding:28px 22px;border:1px solid rgba(201,169,97,.25);border-radius:14px;
+    background:linear-gradient(180deg,rgba(201,169,97,.06) 0%,rgba(201,169,97,.01) 100%);
+    display:flex;flex-direction:column;align-items:center;text-align:center;
+    transition:transform .3s,box-shadow .3s;
+  }
+  .strat-step:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 30px rgba(0,0,0,.3);
+    border-color:var(--dorado);
+  }
+  .strat-step-num{
+    width:56px;height:56px;border-radius:50%;
+    background:linear-gradient(135deg,rgba(201,169,97,.2),rgba(201,169,97,.05));
+    border:1px solid var(--dorado);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:22px;color:var(--dorado);
+    font-weight:400;letter-spacing:-.02em;font-style:italic;line-height:1;
+    margin-bottom:18px;flex-shrink:0;
+  }
+  .strat-step-content h4{
+    font-family:var(--serif);font-size:18px;color:var(--crema);font-weight:500;
+    letter-spacing:-.01em;line-height:1.2;margin-bottom:12px;
+  }
+  .strat-step-content p{
+    font-size:12.5px;color:var(--gris-cl);line-height:1.7;
+  }
+  body.theme-premium .strat-step-num{
+    color:var(--dorado);text-shadow:0 0 20px rgba(212,175,55,.3);
+    box-shadow:0 0 20px rgba(212,175,55,.15);
+  }
+  /* Flecha entre pasos */
+  .strat-arrow{
+    display:flex;align-items:center;justify-content:center;
+    color:var(--dorado);font-size:24px;font-weight:300;
+    padding:0 8px;
+    opacity:.6;
+  }
+  @media(max-width:880px){
+    .strat-arrow{transform:rotate(90deg);padding:0;opacity:.4}
+  }
+
+  /* === RESUMEN PARA REDES SOCIALES === */
+  .social-deliv{
+    margin-top:32px;padding:28px;
+    background:linear-gradient(180deg,rgba(201,169,97,.06) 0%,rgba(201,169,97,.01) 100%);
+    border:1px solid rgba(201,169,97,.25);border-radius:12px;
+  }
+  .social-deliv-h{
+    font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--dorado);
+    font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;
+  }
+  .social-deliv-h::before{content:"";width:8px;height:8px;background:var(--dorado);border-radius:50%}
+  .social-deliv h4{
+    font-family:var(--serif);font-size:18px;color:var(--crema);font-weight:500;margin-bottom:14px;letter-spacing:-.01em;
+  }
+  .social-deliv h4 em{font-style:italic;color:var(--dorado);font-weight:400}
+  .social-deliv-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  }
+  @media(max-width:680px){.social-deliv-grid{grid-template-columns:1fr 1fr}}
+  .social-deliv-item{
+    padding:14px;background:rgba(0,0,0,.25);border-radius:8px;text-align:center;
+  }
+  .social-deliv-item b{
+    display:block;font-family:var(--serif);font-size:24px;color:var(--dorado);
+    font-weight:400;letter-spacing:-.02em;margin-bottom:4px;line-height:1;
+  }
+  .social-deliv-item span{
+    font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gris-cl);font-weight:500;line-height:1.3;display:block;
+  }
+
+  /* === FRAMES VISUALES DE ENTREGABLES WEB === */
+  .web-frames{
+    margin-top:24px;display:grid;grid-template-columns:repeat(2,1fr);gap:20px;
+  }
+  @media(max-width:780px){.web-frames{grid-template-columns:1fr}}
+  .web-frame-wrap{display:flex;flex-direction:column}
+  .web-frame{
+    background:var(--blanco);border-radius:10px;overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,.4),0 8px 20px rgba(0,0,0,.25);
+    position:relative;
+  }
+  .web-frame-bar{
+    background:#E8E2D6;padding:7px 12px;display:flex;align-items:center;gap:5px;
+    border-bottom:1px solid #D4CCBA;
+  }
+  .web-frame-bar i{width:7px;height:7px;border-radius:50%;background:#C9A961;opacity:.5}
+  .web-frame-bar i:nth-child(2){background:#A88845}
+  .web-frame-bar i:nth-child(3){background:#5C6B4A}
+  .web-frame-bar span{margin-left:auto;font-size:9px;color:#7A6E62;letter-spacing:.5px}
+  .web-frame-content{position:relative;aspect-ratio:16/10;overflow:hidden}
+  .web-frame-label{
+    text-align:center;margin-top:10px;font-size:10px;letter-spacing:2px;
+    text-transform:uppercase;color:var(--dorado);font-weight:600;
+  }
+  .web-frame-label small{display:block;font-size:9.5px;color:var(--gris-cl);letter-spacing:.5px;margin-top:4px;text-transform:none;font-weight:400;font-style:italic}
+
+  /* Frame: Hero con video */
+  .frame-hero{
+    background:linear-gradient(135deg,#5C6B4A 0%,#3D4A2E 60%,#1A1410 100%);
+    position:relative;display:flex;align-items:flex-end;padding:18px;height:100%;
+  }
+  .frame-hero::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 30% 60%,rgba(201,169,97,.18),transparent 60%);
+  }
+  .frame-hero-play{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.95);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 30px rgba(0,0,0,.4);
+  }
+  .frame-hero-play::after{
+    content:"";width:0;height:0;
+    border-left:14px solid var(--negro);border-top:9px solid transparent;border-bottom:9px solid transparent;
+    margin-left:4px;
+  }
+  .frame-hero-text{position:relative;color:var(--blanco)}
+  .frame-hero-text b{display:block;font-family:var(--serif);font-size:18px;font-weight:400;letter-spacing:-.02em;font-style:italic;line-height:1.1}
+  .frame-hero-text small{display:block;font-size:9px;color:var(--dorado);letter-spacing:2px;text-transform:uppercase;margin-top:6px;font-weight:600}
+
+  /* Frame: Galería */
+  .frame-gallery{
+    display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:3px;padding:3px;background:var(--negro);
+    height:100%;
+  }
+  .frame-gallery div{background:linear-gradient(135deg,var(--verde),var(--verde-osc))}
+  .frame-gallery div:nth-child(2){background:linear-gradient(135deg,#8B7355,#5C4A3A)}
+  .frame-gallery div:nth-child(3){background:linear-gradient(135deg,var(--dorado-osc),var(--tierra))}
+  .frame-gallery div:nth-child(4){background:linear-gradient(135deg,var(--verde-osc),var(--negro))}
+  .frame-gallery div:nth-child(5){background:linear-gradient(135deg,var(--dorado),#A88845)}
+  .frame-gallery div:nth-child(6){background:linear-gradient(135deg,var(--tierra),var(--negro))}
+  .frame-gallery div:nth-child(7){background:linear-gradient(135deg,#8B7355,var(--negro))}
+  .frame-gallery div:nth-child(8){background:linear-gradient(135deg,var(--verde-osc),var(--tierra))}
+
+  /* Frame: Mapa */
+  .frame-map{
+    position:relative;height:100%;
+    background:
+      radial-gradient(ellipse at 30% 30%,#F5EFE6 0%,transparent 60%),
+      radial-gradient(ellipse at 70% 70%,#EDE4D3 0%,#D4CCBA 100%);
+  }
+  .frame-map::before{
+    content:"";position:absolute;top:30%;left:0;right:0;height:1px;background:rgba(168,136,69,.2);
+  }
+  .frame-map::after{
+    content:"";position:absolute;top:0;left:60%;bottom:0;width:1px;background:rgba(168,136,69,.2);
+  }
+  .frame-map-roads{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(45deg,transparent 48%,rgba(168,136,69,.15) 48%,rgba(168,136,69,.15) 52%,transparent 52%),
+      linear-gradient(135deg,transparent 48%,rgba(168,136,69,.15) 48%,rgba(168,136,69,.15) 52%,transparent 52%);
+    background-size:60px 60px,80px 80px;
+  }
+  .frame-map-pin{
+    position:absolute;top:50%;left:55%;transform:translate(-50%,-100%);
+    width:32px;height:42px;
+  }
+  .frame-map-pin::before{
+    content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:28px;height:28px;border-radius:50%;background:var(--dorado);
+    border:3px solid var(--blanco);box-shadow:0 4px 12px rgba(0,0,0,.3);
+    z-index:2;
+  }
+  .frame-map-pin::after{
+    content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+    width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;
+    border-top:14px solid var(--dorado);
+  }
+  .frame-map-pulse{
+    position:absolute;top:50%;left:55%;transform:translate(-50%,-50%);
+    width:40px;height:40px;border-radius:50%;background:rgba(201,169,97,.3);
+    animation:map-pulse 2s ease-out infinite;
+  }
+  @keyframes map-pulse{
+    0%{transform:translate(-50%,-50%) scale(.5);opacity:.8}
+    100%{transform:translate(-50%,-50%) scale(2.5);opacity:0}
+  }
+  .frame-map-label{
+    position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
+    background:var(--negro);color:var(--blanco);padding:7px 16px;border-radius:30px;
+    font-size:11px;font-weight:600;letter-spacing:1px;text-align:center;
+    box-shadow:0 4px 16px rgba(0,0,0,.4);
+  }
+  .frame-map-label small{display:block;font-size:8px;color:var(--dorado);letter-spacing:1.5px;margin-top:2px;text-transform:uppercase}
+
+  /* Frame: Datos finca */
+  .frame-data{
+    background:linear-gradient(180deg,#F5EFE6 0%,#EDE4D3 100%);
+    padding:18px;display:flex;flex-direction:column;justify-content:center;height:100%;
+  }
+  .frame-data-tag{
+    font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--dorado-osc);font-weight:700;text-align:center;margin-bottom:6px;
+  }
+  .frame-data-price{
+    font-family:var(--serif);font-size:30px;color:var(--tierra);font-weight:400;
+    letter-spacing:-.02em;line-height:1;margin-bottom:14px;text-align:center;
+  }
+  .frame-data-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:6px;
+  }
+  .frame-data-grid div{
+    text-align:center;padding:10px 4px;background:var(--blanco);border-radius:4px;
+    border:1px solid #E0D6C2;
+  }
+  .frame-data-grid b{display:block;font-family:var(--serif);font-size:14px;color:var(--dorado-osc);font-weight:500;line-height:1}
+  .frame-data-grid span{font-size:8px;color:var(--gris);letter-spacing:1px;text-transform:uppercase;margin-top:4px;display:block}
+
+  /* === OPCIONES DE ADS (reemplaza calculadora) === */
+  .calculator{
+    margin:48px 0;padding:40px 32px;
+    background:linear-gradient(135deg,rgba(212,175,55,.15) 0%,rgba(212,175,55,.04) 100%);
+    border:1px solid var(--dorado);border-radius:18px;position:relative;overflow:hidden;
+  }
+  .calculator::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 30% 50%,rgba(212,175,55,.1),transparent 60%);
+  }
+  .calc-tag{
+    font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dorado);
+    font-weight:700;margin-bottom:12px;position:relative;
+  }
+  .calculator h3{
+    font-family:var(--serif);font-size:28px;color:var(--crema);font-weight:400;
+    margin-bottom:10px;letter-spacing:-.02em;line-height:1.1;position:relative;
+  }
+  .calculator h3 em{font-style:italic;color:var(--dorado);font-weight:300}
+  .calculator > p{
+    font-size:13px;color:var(--gris-cl);max-width:600px;line-height:1.6;margin-bottom:32px;position:relative;
+  }
+
+  /* Opciones lado a lado */
+  .ads-options{
+    display:grid;grid-template-columns:1fr 1fr;gap:18px;position:relative;margin-bottom:40px;
+  }
+  @media(max-width:780px){.ads-options{grid-template-columns:1fr}}
+
+  .ads-option{
+    padding:30px 26px;border-radius:14px;
+    background:linear-gradient(180deg,rgba(0,0,0,.4) 0%,rgba(0,0,0,.2) 100%);
+    border:1px solid rgba(201,169,97,.25);position:relative;
+    display:flex;flex-direction:column;
+  }
+  .ads-option.recommended{
+    border:1px solid var(--dorado);
+    background:linear-gradient(180deg,rgba(212,175,55,.15) 0%,rgba(212,175,55,.03) 100%);
+    box-shadow:0 20px 60px rgba(212,175,55,.2);
+  }
+  .ads-option-badge{
+    position:absolute;top:-12px;right:20px;
+    background:var(--dorado);color:var(--negro);
+    padding:5px 14px;border-radius:30px;
+    font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;
+    box-shadow:0 4px 12px rgba(212,175,55,.4);
+  }
+  .ads-option-tag{
+    font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--gris-cl);font-weight:600;margin-bottom:8px;
+  }
+  .ads-option.recommended .ads-option-tag{color:var(--dorado)}
+  .ads-option-name{
+    font-family:var(--serif);font-size:30px;color:var(--crema);font-weight:400;
+    letter-spacing:-.025em;line-height:1;font-style:italic;margin-bottom:14px;
+  }
+  .ads-option-monthly{
+    font-family:var(--serif);font-size:42px;color:var(--crema);font-weight:300;
+    letter-spacing:-.03em;line-height:1;margin-bottom:6px;
+  }
+  .ads-option.recommended .ads-option-monthly{color:var(--dorado)}
+  .ads-option-monthly small{
+    font-family:var(--sans);font-size:13px;color:var(--gris-cl);font-weight:400;
+    letter-spacing:0;text-transform:uppercase;letter-spacing:1px;margin-left:4px;
+  }
+  .ads-option-total{
+    font-size:11px;color:var(--gris-cl);letter-spacing:1px;font-style:italic;
+    padding-bottom:18px;border-bottom:1px dashed rgba(201,169,97,.2);margin-bottom:18px;
+  }
+
+  .ads-option-stats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;
+  }
+  .ads-option-stat{
+    text-align:center;padding:12px 6px;
+    background:rgba(0,0,0,.3);border-radius:8px;
+  }
+  .ads-option-stat b{
+    display:block;font-family:var(--serif);font-size:18px;color:var(--dorado);
+    font-weight:500;letter-spacing:-.01em;line-height:1;margin-bottom:4px;
+  }
+  .ads-option-stat span{
+    font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--gris-cl);
+    font-weight:500;line-height:1.3;display:block;
+  }
+
+  .ads-option-prob{
+    padding:18px;text-align:center;border-radius:10px;
+    background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.25);
+    margin-bottom:14px;
+  }
+  .ads-option.recommended .ads-option-prob{
+    background:rgba(0,0,0,.35);border:1px solid var(--dorado);
+  }
+  .ads-option-prob-label{
+    font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gris-cl);
+    font-weight:600;margin-bottom:6px;
+  }
+  .ads-option-prob-num{
+    font-family:var(--serif);font-size:32px;color:var(--dorado);font-weight:400;
+    letter-spacing:-.02em;line-height:1;font-style:italic;
+  }
+  .ads-option.recommended .ads-option-prob-num{
+    text-shadow:0 0 30px rgba(212,175,55,.4);
+  }
+
+  .ads-option-desc{
+    font-size:11.5px;color:var(--gris-cl);line-height:1.6;font-style:italic;
+    font-family:var(--serif);
+  }
+
+  /* Explicación con fuentes */
+  .ads-explainer{
+    padding:32px 28px;background:rgba(0,0,0,.3);border:1px solid rgba(201,169,97,.2);
+    border-radius:14px;position:relative;
+  }
+  .ads-explainer-h{
+    font-family:var(--serif);font-size:20px;color:var(--crema);font-weight:500;
+    letter-spacing:-.01em;margin-bottom:24px;font-style:italic;
+    padding-bottom:16px;border-bottom:1px solid rgba(201,169,97,.2);
+  }
+  .ads-explainer-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:20px;
+  }
+  @media(max-width:780px){.ads-explainer-grid{grid-template-columns:1fr}}
+
+  .ads-explainer-item{
+    padding:20px;background:rgba(245,239,230,.03);border:1px solid rgba(201,169,97,.15);
+    border-radius:10px;
+  }
+  .ads-explainer-num{
+    width:32px;height:32px;border-radius:50%;
+    background:rgba(201,169,97,.15);border:1px solid var(--dorado);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:14px;color:var(--dorado);font-style:italic;font-weight:400;
+    margin-bottom:14px;
+  }
+  .ads-explainer-item h5{
+    font-family:var(--serif);font-size:15px;color:var(--crema);font-weight:500;
+    letter-spacing:-.01em;line-height:1.3;margin-bottom:10px;
+  }
+  .ads-explainer-item p{
+    font-size:12px;color:var(--gris-cl);line-height:1.6;
+  }
+  .ads-explainer-item p b{color:var(--dorado);font-family:var(--serif);font-style:italic;font-weight:500}
+
+  .ads-sources{
+    margin-top:24px;padding-top:18px;border-top:1px dashed rgba(201,169,97,.2);
+    font-size:10.5px;color:var(--gris);line-height:1.6;font-style:italic;
+  }
+  .ads-sources b{color:var(--gris-cl);font-weight:600;font-style:normal}
+
+  .precio-block{
+    margin-top:48px;padding:40px 32px;
+    background:linear-gradient(135deg,var(--tierra) 0%,var(--negro) 100%);
+    border:1px solid var(--dorado);border-radius:18px;position:relative;overflow:hidden;
+  }
+  .precio-block::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 30% 50%,rgba(201,169,97,.12),transparent 60%);
+  }
+  .precio-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;position:relative}
+  @media(max-width:780px){.precio-grid{grid-template-columns:1fr}}
+  .precio-l h4{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dorado);margin-bottom:10px;font-weight:700}
+  .precio-l h2{font-family:var(--serif);font-size:28px;color:var(--crema);font-weight:400;margin-bottom:14px;letter-spacing:-.02em;line-height:1.1}
+  .precio-l h2 em{font-style:italic;color:var(--dorado);font-weight:300}
+  .precio-l p{font-size:13px;color:var(--gris-cl);line-height:1.6}
+
+  .precio-r{
+    background:rgba(201,169,97,.1);border:1px solid var(--dorado);border-radius:14px;padding:24px;
+  }
+  .precio-line{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    padding:14px 0;border-bottom:1px dashed rgba(201,169,97,.2);
+  }
+  .precio-line:last-of-type{border-bottom:none}
+  .precio-line-l{flex:1}
+  .precio-line-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gris-cl);font-weight:600;margin-bottom:4px}
+  .precio-line-desc{font-size:11px;color:var(--gris-cl);line-height:1.4;font-style:italic}
+  .precio-line-num{
+    font-family:var(--serif);font-size:32px;color:var(--crema);font-weight:400;letter-spacing:-.02em;line-height:1;
+    text-align:right;flex-shrink:0;margin-left:12px;
+  }
+  .precio-line.ads .precio-line-num{color:var(--dorado-osc);font-size:26px}
+  .precio-plus{
+    text-align:center;color:var(--dorado);font-family:var(--serif);font-size:24px;font-weight:300;
+    padding:6px 0;opacity:.5;
+  }
+  .precio-total-box{
+    margin-top:14px;padding:18px;
+    background:linear-gradient(135deg,rgba(201,169,97,.2),rgba(201,169,97,.08));
+    border:1px solid var(--dorado);border-radius:10px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .precio-total-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dorado);font-weight:700}
+  .precio-total-num{
+    font-family:var(--serif);font-size:42px;color:var(--dorado);font-weight:400;letter-spacing:-.02em;line-height:1;
+  }
+  .precio-note{
+    margin-top:14px;font-size:10.5px;color:var(--gris);text-align:center;line-height:1.5;font-style:italic;
+  }
+
+  /* === CTA === */
+  .cta-final{
+    margin:48px auto;max-width:1200px;padding:48px 32px;
+    background:linear-gradient(135deg,var(--tierra) 0%,var(--negro) 100%);
+    border:1px solid var(--dorado);border-radius:18px;text-align:center;position:relative;overflow:hidden;
+  }
+  .cta-final::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at center,rgba(201,169,97,.12),transparent 70%);
+  }
+  .cta-final h2{font-family:var(--serif);font-size:30px;color:var(--crema);font-weight:400;margin-bottom:12px;position:relative;letter-spacing:-.02em}
+  .cta-final h2 em{font-style:italic;color:var(--dorado);font-weight:300}
+  .cta-final p{font-size:14px;color:var(--gris-cl);max-width:520px;margin:0 auto 24px;position:relative;line-height:1.6}
+  .cta-final-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
+  .cta-final-btns a{
+    padding:14px 26px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;
+    border-radius:2px;text-decoration:none;display:inline-block;
+  }
+  .btn-pri{background:var(--dorado);color:var(--negro)}
+  .btn-sec{border:1px solid rgba(201,169,97,.4);color:var(--crema)}
+
+  footer{padding:24px;text-align:center;font-size:11px;color:var(--gris);letter-spacing:1px;border-top:1px solid rgba(201,169,97,.1)}
+  footer span{color:var(--dorado)}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .parte,.cta-final{animation:fadeUp .6s ease-out}
+</style>
+</head>
+<body>
+
+<div class="studio-bar">
+  <div class="studio-logo">
+    <svg class="studio-logo-svg" viewBox="0 0 60 38" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <!-- Bracket izquierdo cyan -->
+      <path d="M 10 4 L 4 4 L 4 34 L 10 34" stroke="#22D3EE" stroke-width="2" stroke-linecap="round"/>
+      <!-- Bracket derecho magenta -->
+      <path d="M 50 4 L 56 4 L 56 34 L 50 34" stroke="#D946EF" stroke-width="2" stroke-linecap="round"/>
+      <!-- SS letras -->
+      <text x="30" y="24" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="14" fill="currentColor" letter-spacing="-1">SS</text>
+      <!-- Línea inferior gradient -->
+      <line x1="22" y1="28" x2="38" y2="28" stroke="url(#logo-grad)" stroke-width="1.5" stroke-linecap="round"/>
+      <defs>
+        <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#22D3EE"/>
+          <stop offset="100%" stop-color="#D946EF"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="studio-logo-text">
+      <span class="studio-logo-name">DÍAZ.CO</span>
+      <span class="studio-logo-tag">
+        <span>DIGITAL</span>
+        <span>·</span>
+        <span>WEB</span>
+        <span>·</span>
+        <span>BRAND</span>
+      </span>
+    </div>
+  </div>
+  <div class="nav-controls">
+    <div class="lang-switch">
+      <button class="lang-btn" onclick="setLang('es', this)">ES</button>
+      <button class="lang-btn active" onclick="setLang('de', this)">DE</button>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">
+    <i></i>
+    <span data-lang="es">Propuesta · Cay</span>
+    <span data-lang="de" class="show">Angebot · Cay</span>
+    <i></i>
+  </div>
+  <h1>
+    <span data-lang="es">Página + Advertising. <em>Dos planes.</em></span>
+    <span data-lang="de" class="show">Website + Advertising. <em>Zwei Pläne.</em></span>
+  </h1>
+  <p>
+    <span data-lang="es">Cada plan dividido en dos partes claras: la web (diseño, desarrollo, conexión técnica) y el advertising (creatividades, embudo, estrategia). Elige cuál ver primero.</span>
+    <span data-lang="de" class="show">Jeder Plan ist in zwei klare Teile gegliedert: die Website (Design, Entwicklung, technische Anbindung) und das Advertising (Kreative, Funnel, Strategie). Wähle, welchen du zuerst sehen möchtest.</span>
+  </p>
+
+  <!-- Métricas elegantes -->
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <b>€1,8M</b>
+      <span><span data-lang-inline="es">Finca</span><span data-lang-inline="de" class="show">Finca</span></span>
+    </div>
+    <div class="hero-meta-divider"></div>
+    <div class="hero-meta-item">
+      <b>90</b>
+      <span><span data-lang-inline="es">Días</span><span data-lang-inline="de" class="show">Tage</span></span>
+    </div>
+    <div class="hero-meta-divider"></div>
+    <div class="hero-meta-item">
+      <b>DACH+UK</b>
+      <span><span data-lang-inline="es">Mercados</span><span data-lang-inline="de" class="show">Märkte</span></span>
+    </div>
+    <div class="hero-meta-divider"></div>
+    <div class="hero-meta-item">
+      <b>EN/DE</b>
+      <span><span data-lang-inline="es">Idiomas</span><span data-lang-inline="de" class="show">Sprachen</span></span>
+    </div>
+  </div>
+
+  <!-- SELECTOR PREMIUM -->
+  <div class="plan-selector">
+    <button class="plan-tab active" data-plan="profesional" onclick="setPlan('profesional', this)">
+      <div class="tier">
+        <span data-lang-inline="es">Equilibrado · €2.890</span><span data-lang-inline="de" class="show">Ausgewogen · €2.890</span>
+      </div>
+      <span class="name">
+        <span data-lang-inline="es">Essential</span><span data-lang-inline="de" class="show">Essential</span>
+      </span>
+      <span class="duration">
+        <span data-lang-inline="es">3 meses</span><span data-lang-inline="de" class="show">3 Monate</span>
+      </span>
+      <span class="price">€2.890</span>
+      <span class="total">
+        <span data-lang-inline="es">+ Ads desde €1.500</span><span data-lang-inline="de" class="show">+ Ads ab €1.500</span>
+        <b>
+          <span data-lang-inline="es">Total desde €4.390</span><span data-lang-inline="de" class="show">Gesamt ab €4.390</span>
+        </b>
+      </span>
+    </button>
+
+    <button class="plan-tab" data-plan="signature" onclick="setPlan('signature', this)">
+      <div class="tier">
+        <span data-lang-inline="es">Plan Bespoke</span><span data-lang-inline="de" class="show">Bespoke-Plan</span>
+      </div>
+      <span class="name">Signature</span>
+      <span class="duration">
+        <span data-lang-inline="es">3 meses · Producción Mallorca</span><span data-lang-inline="de" class="show">3 Monate · Mallorca-Produktion</span>
+      </span>
+      <span class="sig-services">
+        <span data-lang-inline="es">3D · Video · Drone · Fotografía · Contenido editorial · PR digital · +</span><span data-lang-inline="de" class="show">3D · Video · Drohne · Fotografie · Editorial-Content · Digital-PR · +</span>
+      </span>
+      <span class="price">
+        <span data-lang-inline="es">A consultar</span><span data-lang-inline="de" class="show">Auf Anfrage</span>
+      </span>
+      <span class="total">
+        <span data-lang-inline="es">Por invitación</span><span data-lang-inline="de" class="show">Auf Einladung</span>
+        <b>★ Bespoke</b>
+      </span>
+    </button>
+  </div>
+</section>
+
+<!-- =================================================================== -->
+<!-- ====================== PLAN PROFESIONAL =========================== -->
+<!-- =================================================================== -->
+<div class="plan-view active" id="view-profesional">
+
+  <!-- ============================================ -->
+  <!-- PARTE 1 AVANZADO · WEB                       -->
+  <!-- ============================================ -->
+  <section class="parte parte-web">
+    <div class="parte-head">
+      <div class="parte-num">1</div>
+      <div class="parte-head-text">
+        <div class="parte-tag">
+          <span data-lang="es">Parte 1 · Web</span>
+          <span data-lang="de" class="show">Teil 1 · Website</span>
+        </div>
+        <h2>
+          <span data-lang="es">Página web <em>premium con storytelling.</em></span>
+          <span data-lang="de" class="show">Premium-Website <em>mit Storytelling.</em></span>
+        </h2>
+        <p class="parte-sub">
+          <span data-lang="es">Una página que cuenta la historia completa de la finca y de Cay. Más fotos, más narrativa, más profundidad técnica. Diseño 100% custom, EN + DE, pensada para impactar a compradores de lujo internacionales.</span>
+          <span data-lang="de" class="show">Eine Website, die die komplette Geschichte der Finca und von Cay erzählt. Mehr Fotos, mehr Narrativ, mehr technische Tiefe. 100% Custom-Design, EN + DE, gemacht, um internationale Luxuskäufer zu beeindrucken.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- 1.1 Estructura - Frames visuales -->
+    <div class="subsec">
+      <div class="subsec-h">
+        <div class="subsec-h-num">1.1</div>
+        <h3>
+          <span data-lang="es">Cómo se <em>verá tu página</em></span>
+          <span data-lang="de" class="show">So <em>sieht deine Website aus</em></span>
+        </h3>
+      </div>
+
+      <div class="web-frames">
+
+        <!-- Frame 1: Hero con video -->
+        <div class="web-frame-wrap">
+          <div class="web-frame">
+            <div class="web-frame-bar">
+              <i></i><i></i><i></i>
+              <span>cay-arquitecto.com</span>
+            </div>
+            <div class="web-frame-content">
+              <div class="frame-hero">
+                <div class="frame-hero-play"></div>
+                <div class="frame-hero-text">
+                  <b><span data-lang-inline="es">Finca Son Moné</span><span data-lang-inline="de" class="show">Finca Son Moné</span></b>
+                  <small><span data-lang-inline="es">Andratx · Mallorca</span><span data-lang-inline="de" class="show">Andratx · Mallorca</span></small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="web-frame-label">
+            <span data-lang-inline="es">Hero con video</span><span data-lang-inline="de" class="show">Hero mit Video</span>
+            <small>
+              <span data-lang-inline="es">Drone cinematográfico que reproduce automáticamente al cargar la página</span>
+              <span data-lang-inline="de" class="show">Kinematische Drohne, die beim Laden automatisch abspielt</span>
+            </small>
+          </div>
+        </div>
+
+        <!-- Frame 2: Galería editorial -->
+        <div class="web-frame-wrap">
+          <div class="web-frame">
+            <div class="web-frame-bar">
+              <i></i><i></i><i></i>
+              <span>cay-arquitecto.com/galeria</span>
+            </div>
+            <div class="web-frame-content">
+              <div class="frame-gallery">
+                <div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div>
+              </div>
+            </div>
+          </div>
+          <div class="web-frame-label">
+            <span data-lang-inline="es">Galería editorial</span><span data-lang-inline="de" class="show">Editorial-Galerie</span>
+            <small>
+              <span data-lang-inline="es">20+ fotos profesionales en categorías: interior, exterior, detalles</span>
+              <span data-lang-inline="de" class="show">20+ Profi-Fotos nach Kategorien: Innen, Außen, Details</span>
+            </small>
+          </div>
+        </div>
+
+        <!-- Frame 3: Datos clave de la finca -->
+        <div class="web-frame-wrap">
+          <div class="web-frame">
+            <div class="web-frame-bar">
+              <i></i><i></i><i></i>
+              <span>cay-arquitecto.com/finca</span>
+            </div>
+            <div class="web-frame-content">
+              <div class="frame-data">
+                <div class="frame-data-tag">
+                  <span data-lang-inline="es">★ En venta directa · Andratx</span><span data-lang-inline="de" class="show">★ Direktverkauf · Andratx</span>
+                </div>
+                <div class="frame-data-price">€1.800.000</div>
+                <div class="frame-data-grid">
+                  <div><b>193 m²</b><span><span data-lang-inline="es">Construido</span><span data-lang-inline="de" class="show">Bauen</span></span></div>
+                  <div><b>2.345 m²</b><span><span data-lang-inline="es">Parcela</span><span data-lang-inline="de" class="show">Grund</span></span></div>
+                  <div><b>3 hab.</b><span><span data-lang-inline="es">Habitac.</span><span data-lang-inline="de" class="show">Schlafz.</span></span></div>
+                  <div><b>2 baños</b><span><span data-lang-inline="es">Baños</span><span data-lang-inline="de" class="show">Bäder</span></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="web-frame-label">
+            <span data-lang-inline="es">Datos clave</span><span data-lang-inline="de" class="show">Kernzahlen</span>
+            <small>
+              <span data-lang-inline="es">Precio, m², habitaciones, baños siempre visibles</span>
+              <span data-lang-inline="de" class="show">Preis, m², Zimmer, Bäder immer sichtbar</span>
+            </small>
+          </div>
+        </div>
+
+        <!-- Frame 4: Mapa de ubicación -->
+        <div class="web-frame-wrap">
+          <div class="web-frame">
+            <div class="web-frame-bar">
+              <i></i><i></i><i></i>
+              <span>cay-arquitecto.com/ubicacion</span>
+            </div>
+            <div class="web-frame-content">
+              <div class="frame-map">
+                <div class="frame-map-roads"></div>
+                <div class="frame-map-pulse"></div>
+                <div class="frame-map-pin"></div>
+                <div class="frame-map-label">
+                  Andratx
+                  <small><span data-lang-inline="es">Mallorca · España</span><span data-lang-inline="de" class="show">Mallorca · Spanien</span></small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="web-frame-label">
+            <span data-lang-inline="es">Mapa interactivo</span><span data-lang-inline="de" class="show">Interaktive Karte</span>
+            <small>
+              <span data-lang-inline="es">Ubicación + tiempos a aeropuerto, playa y Palma</span>
+              <span data-lang-inline="de" class="show">Lage + Fahrtzeiten Flughafen, Strand und Palma</span>
+            </small>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Lista resumen de secciones que tendrá la web -->
+      <div class="tech-list" style="margin-top:24px">
+        <div class="tech-list-h">
+          <span data-lang="es">Y también incluye</span>
+          <span data-lang="de" class="show">Außerdem enthält</span>
+        </div>
+        <ul>
+          <li><span data-lang-inline="es"><b>La historia de la finca</b> — sección narrativa con 125 años de historia, restauración 1989-2026, materiales</span><span data-lang-inline="de" class="show"><b>Die Geschichte der Finca</b> — Narrativ mit 125 Jahren Geschichte, Restaurierung 1989-2026, Materialien</span></li>
+          <li><span data-lang-inline="es"><b>Características técnicas</b> — muros 70cm, vigas centenarias, energía solar, aerotermia, certificado energético</span><span data-lang-inline="de" class="show"><b>Technische Ausstattung</b> — 70cm-Mauern, alte Balken, Solar, Wärmepumpe, Energieausweis</span></li>
+          <li><span data-lang-inline="es"><b>Cay arquitecto</b> — biografía extendida con timeline, formación, filosofía y foto profesional</span><span data-lang-inline="de" class="show"><b>Cay Architekt</b> — erweiterte Biografie mit Timeline, Ausbildung, Philosophie und Profifoto</span></li>
+          <li><span data-lang-inline="es"><b>Portafolio</b> — 6-8 proyectos anteriores con fotos, año y descripción</span><span data-lang-inline="de" class="show"><b>Portfolio</b> — 6-8 frühere Projekte mit Fotos, Jahr und Beschreibung</span></li>
+          <li><span data-lang-inline="es"><b>FAQ + formulario</b> — 8 preguntas frecuentes + formulario con WhatsApp directo</span><span data-lang-inline="de" class="show"><b>FAQ + Formular</b> — 8 häufige Fragen + Formular mit Direkt-WhatsApp</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 1.2 Diseño -->
+    <div class="subsec">
+      <div class="subsec-h">
+        <div class="subsec-h-num">1.2</div>
+        <h3>
+          <span data-lang="es">Diseño <em>premium custom</em></span>
+          <span data-lang="de" class="show">Premium-Custom-<em>Design</em></span>
+        </h3>
+      </div>
+      <div class="tech-list">
+        <div class="tech-list-h">
+          <span data-lang="es">Lo que entregamos</span>
+          <span data-lang="de" class="show">Was wir liefern</span>
+        </div>
+        <ul>
+          <li><span data-lang-inline="es">Diseño <b>100% custom</b> · sin templates · animaciones suaves al hacer scroll</span><span data-lang-inline="de" class="show"><b>100% Custom-Design</b> · keine Templates · sanfte Scroll-Animationen</span></li>
+          <li><span data-lang-inline="es">Responsive avanzado · breakpoints específicos para tablets verticales y móviles grandes</span><span data-lang-inline="de" class="show">Erweitertes Responsive · spezifische Breakpoints für Tablets und große Mobiles</span></li>
+          <li><span data-lang-inline="es"><b>2 idiomas</b>: EN + DE perfectamente traducidos</span><span data-lang-inline="de" class="show"><b>2 Sprachen</b>: EN + DE perfekt übersetzt</span></li>
+          <li><span data-lang-inline="es">Hosting premium + dominio + SSL + CDN para velocidad global</span><span data-lang-inline="de" class="show">Premium-Hosting + Domain + SSL + CDN für globale Geschwindigkeit</span></li>
+          <li><span data-lang-inline="es">Velocidad de carga optimizada (PageSpeed > 95)</span><span data-lang-inline="de" class="show">Optimierte Ladegeschwindigkeit (PageSpeed > 95)</span></li>
+          <li><span data-lang-inline="es">SEO completo · keyword research · schema.org RealEstate · sitemap multilingüe</span><span data-lang-inline="de" class="show">Komplettes SEO · Keyword-Recherche · schema.org RealEstate · mehrsprachige Sitemap</span></li>
+          <li><span data-lang-inline="es">Dossier PDF premium (16 páginas + planos arquitectónicos)</span><span data-lang-inline="de" class="show">Premium-Exposé PDF (16 Seiten + Architekturpläne)</span></li>
+          <li><span data-lang-inline="es">Tour virtual integrado (Matterport o video 360° si está disponible)</span><span data-lang-inline="de" class="show">Integrierte virtuelle Tour (Matterport oder 360°-Video falls verfügbar)</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 1.3 Conexiones -->
+    <div class="subsec">
+      <div class="subsec-h">
+        <div class="subsec-h-num">1.3</div>
+        <h3>
+          <span data-lang="es">Conexión <em>técnica avanzada</em></span>
+          <span data-lang="de" class="show">Erweiterte <em>technische Verbindung</em></span>
+        </h3>
+      </div>
+      <div class="tech-list">
+        <div class="tech-list-h">
+          <span data-lang="es">Tracking de nivel agencia</span>
+          <span data-lang="de" class="show">Tracking auf Agentur-Niveau</span>
+        </div>
+        <ul>
+          <li><span data-lang-inline="es"><b>Meta Pixel + Conversions API</b> (server-side tracking, sobrevive bloqueadores)</span><span data-lang-inline="de" class="show"><b>Meta Pixel + Conversions API</b> (Server-side Tracking, umgeht Blocker)</span></li>
+          <li><span data-lang-inline="es"><b>Google Analytics 4</b> + medición de conversiones</span><span data-lang-inline="de" class="show"><b>Google Analytics 4</b> + Conversion-Tracking</span></li>
+          <li><span data-lang-inline="es">Eventos de conversión avanzados con valor monetario asignado</span><span data-lang-inline="de" class="show">Erweiterte Conversion-Events mit Geldwert</span></li>
+          <li><span data-lang-inline="es">WhatsApp Business + plantillas EN/DE + 6 etiquetas de cualificación de leads</span><span data-lang-inline="de" class="show">WhatsApp Business + EN/DE-Vorlagen + 6 Lead-Qualifizierungs-Labels</span></li>
+          <li><span data-lang-inline="es">Email automation: secuencia de 5 emails post-descarga del dossier (EN/DE)</span><span data-lang-inline="de" class="show">E-Mail-Automation: 5-E-Mail-Sequenz nach Exposé-Download (EN/DE)</span></li>
+          <li><span data-lang-inline="es">Dashboard <b>Looker Studio</b> en tiempo real con todas las métricas clave</span><span data-lang-inline="de" class="show">Echtzeit-<b>Looker Studio</b>-Dashboard mit allen KPIs</span></li>
+          <li><span data-lang-inline="es">CRM ligero (Brevo o HubSpot Free) para gestionar leads</span><span data-lang-inline="de" class="show">Light-CRM (Brevo oder HubSpot Free) zur Lead-Verwaltung</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- PARTE 2 AVANZADO · ADVERTISING               -->
+  <!-- ============================================ -->
+  <section class="parte parte-ads">
+    <div class="parte-head">
+      <div class="parte-num">2</div>
+      <div class="parte-head-text">
+        <div class="parte-tag">
+          <span data-lang="es">Parte 2 · Advertising</span>
+          <span data-lang="de" class="show">Teil 2 · Advertising</span>
+        </div>
+        <h2>
+          <span data-lang="es">Estrategia <em>en 3 momentos.</em></span>
+          <span data-lang="de" class="show">Strategie <em>in 3 Momenten.</em></span>
+        </h2>
+        <p class="parte-sub">
+          <span data-lang="es">Campañas en Facebook e Instagram (Meta Ads) diseñadas para llevar a alemanes y británicos interesados en Mallorca desde un primer descubrimiento de la finca hasta una visita real contigo. Sin tecnicismos: solo resultados.</span>
+          <span data-lang="de" class="show">Kampagnen auf Facebook und Instagram (Meta Ads), die Deutsche und Briten mit Mallorca-Interesse von der ersten Entdeckung der Finca bis zu einer echten Besichtigung mit dir führen. Ohne Fachjargon: nur Ergebnisse.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- 2.1 Creatividades Essential -->
+    <div class="subsec">
+      <div class="subsec-h">
+        <div class="subsec-h-num">2.1</div>
+        <h3>
+          <span data-lang="es">Creatividades <em>incluidas</em></span>
+          <span data-lang="de" class="show">Enthaltene <em>Kreative</em></span>
+        </h3>
+      </div>
+      <div class="tech-list">
+        <div class="tech-list-h">
+          <span data-lang="es">Material para campañas — sin nueva producción</span>
+          <span data-lang="de" class="show">Material für Kampagnen — ohne Neuproduktion</span>
+        </div>
+        <ul>
+          <li><span data-lang-inline="es"><b>3 Reels de 30 segundos</b> editados con videos y fotos ya existentes de la finca · EN + DE</span><span data-lang-inline="de" class="show"><b>3 Reels à 30 Sekunden</b> bearbeitet mit bereits vorhandenen Videos und Fotos der Finca · EN + DE</span></li>
+          <li><span data-lang-inline="es">Reel 01 — Edición cinematográfica del material existente con voz profesional <b>(captar atención)</b></span><span data-lang-inline="de" class="show">Reel 01 — Kinematische Bearbeitung des vorhandenen Materials mit Profistimme <b>(Aufmerksamkeit)</b></span></li>
+          <li><span data-lang-inline="es">Reel 02 — Detalles arquitectónicos y la historia de la finca <b>(generar confianza)</b></span><span data-lang-inline="de" class="show">Reel 02 — Architekturdetails und Geschichte der Finca <b>(Vertrauen)</b></span></li>
+          <li><span data-lang-inline="es">Reel 03 — Invitación directa a contactar con Cay <b>(cerrar visita)</b></span><span data-lang-inline="de" class="show">Reel 03 — Direkte Einladung, Cay zu kontaktieren <b>(Besichtigung)</b></span></li>
+          <li><span data-lang-inline="es"><b>10 posts Instagram</b> formato 1:1 estáticos con fotos existentes</span><span data-lang-inline="de" class="show"><b>10 Instagram-Posts</b> Format 1:1 statisch mit vorhandenen Fotos</span></li>
+          <li><span data-lang-inline="es">Mix: fotos editoriales, citas de Cay, datos clave, detalles arquitectónicos</span><span data-lang-inline="de" class="show">Mix: Editorial-Fotos, Cay-Zitate, Kerndaten, Architekturdetails</span></li>
+          <li><span data-lang-inline="es">Voz profesional (TTS premium o voz humana contratada)</span><span data-lang-inline="de" class="show">Professionelle Stimme (Premium-TTS oder menschliche Stimme)</span></li>
+          <li><span data-lang-inline="es">Subtítulos integrados en DE + EN en todos los videos</span><span data-lang-inline="de" class="show">Integrierte Untertitel auf DE + EN in allen Videos</span></li>
+          <li><span data-lang-inline="es">Pruebas A/B quincenales con variantes de las creatividades principales</span><span data-lang-inline="de" class="show">14-tägl. A/B-Tests mit Varianten der Haupt-Kreative</span></li>
+        </ul>
+      </div>
+
+      <!-- Resumen redes sociales -->
+      <div class="social-deliv">
+        <div class="social-deliv-h">
+          <span data-lang="es">Resumen para redes sociales</span>
+          <span data-lang="de" class="show">Zusammenfassung Social Media</span>
+        </div>
+        <h4>
+          <span data-lang="es">Lo que <em>publicamos cada mes</em></span>
+          <span data-lang="de" class="show">Was wir <em>monatlich veröffentlichen</em></span>
+        </h4>
+        <div class="social-deliv-grid">
+          <div class="social-deliv-item">
+            <b>3</b>
+            <span>Reels Instagram</span>
+          </div>
+          <div class="social-deliv-item">
+            <b>5</b>
+            <span>Posts feed</span>
+          </div>
+          <div class="social-deliv-item">
+            <b>8</b>
+            <span>Stories</span>
+          </div>
+          <div class="social-deliv-item">
+            <b>2</b>
+            <span><span data-lang-inline="es">Carruseles</span><span data-lang-inline="de" class="show">Karussells</span></span>
+          </div>
+          <div class="social-deliv-item">
+            <b>EN+DE</b>
+            <span><span data-lang-inline="es">Idiomas</span><span data-lang-inline="de" class="show">Sprachen</span></span>
+          </div>
+          <div class="social-deliv-item">
+            <b>DACH</b>
+            <span><span data-lang-inline="es">Mercados</span><span data-lang-inline="de" class="show">Märkte</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="subsec">
+      <div class="subsec-h">
+        <div class="subsec-h-num">2.2</div>
+        <h3>
+          <span data-lang="es">Cómo <em>llegamos al comprador</em></span>
+          <span data-lang="de" class="show">Wie wir <em>den Käufer erreichen</em></span>
+        </h3>
+      </div>
+
+      <div class="strat-simple">
+
+        <div class="strat-step">
+          <div class="strat-step-num">01</div>
+          <div class="strat-step-content">
+            <h4><span data-lang="es">Atraer al comprador correcto</span><span data-lang="de" class="show">Den richtigen Käufer anziehen</span></h4>
+            <p>
+              <span data-lang="es">Mostramos la finca en Facebook e Instagram a alemanes y británicos con interés en Mallorca, segunda residencia, arquitectura y propiedades de lujo. Edades 35-65, alto poder adquisitivo.</span>
+              <span data-lang="de" class="show">Wir zeigen die Finca auf Facebook und Instagram Deutschen und Briten mit Interesse an Mallorca, Zweitwohnsitz, Architektur und Luxusimmobilien. Alter 35-65, hohe Kaufkraft.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="strat-arrow">→</div>
+
+        <div class="strat-step">
+          <div class="strat-step-num">02</div>
+          <div class="strat-step-content">
+            <h4><span data-lang="es">Convertir interés en contacto</span><span data-lang="de" class="show">Interesse in Kontakt umwandeln</span></h4>
+            <p>
+              <span data-lang="es">A quien ya vio la finca, le mostramos contenido más profundo (la historia, los detalles únicos) e invitamos a descargar el dossier o escribir por WhatsApp.</span>
+              <span data-lang="de" class="show">Wer die Finca bereits gesehen hat, sieht tiefere Inhalte (Geschichte, einzigartige Details) und wird eingeladen, das Exposé herunterzuladen oder per WhatsApp zu schreiben.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="strat-arrow">→</div>
+
+        <div class="strat-step">
+          <div class="strat-step-num">03</div>
+          <div class="strat-step-content">
+            <h4><span data-lang="es">Convertir contacto en visita</span><span data-lang="de" class="show">Kontakt in Besichtigung umwandeln</span></h4>
+            <p>
+              <span data-lang="es">A quien descargó el dossier, le hacemos seguimiento personalizado por WhatsApp y email, e invitamos a una visita privada con Cay. Respuesta en menos de 24h.</span>
+              <span data-lang="de" class="show">Wer das Exposé heruntergeladen hat, wird persönlich per WhatsApp und E-Mail nachverfolgt und zu einer Privatbesichtigung mit Cay eingeladen. Antwort in unter 24h.</span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2.3 OPCIONES DE PRESUPUESTO ADS -->
+    <div class="calculator">
+      <div class="calc-tag">
+        <span data-lang="es">Presupuesto Ads · 2 opciones recomendadas</span>
+        <span data-lang="de" class="show">Ads-Budget · 2 empfohlene Optionen</span>
+      </div>
+      <h3>
+        <span data-lang="es">¿Cuánto invertir <em>en publicidad?</em></span>
+        <span data-lang="de" class="show">Wie viel <em>in Werbung investieren?</em></span>
+      </h3>
+      <p>
+        <span data-lang="es">El presupuesto de Ads se paga directamente a Meta (Facebook/Instagram) y es independiente de los honorarios. A más inversión, más alcance y más probabilidad de conseguir visitas reales a la finca en 90 días.</span>
+        <span data-lang="de" class="show">Das Ads-Budget wird direkt an Meta (Facebook/Instagram) gezahlt und ist unabhängig vom Honorar. Mehr Investition = mehr Reichweite und mehr Wahrscheinlichkeit, in 90 Tagen echte Besichtigungen zu generieren.</span>
+      </p>
+
+      <div class="ads-options">
+
+        <!-- OPCIÓN MINI -->
+        <div class="ads-option">
+          <div class="ads-option-tag">
+            <span data-lang="es">Opción mínima</span>
+            <span data-lang="de" class="show">Mindestoption</span>
+          </div>
+          <div class="ads-option-name">Mini</div>
+          <div class="ads-option-monthly">
+            €500<small><span data-lang-inline="es">/mes</span><span data-lang-inline="de" class="show">/Monat</span></small>
+          </div>
+          <div class="ads-option-total">
+            <span data-lang="es">€1.500 total · 3 meses</span>
+            <span data-lang="de" class="show">€1.500 gesamt · 3 Monate</span>
+          </div>
+          <div class="ads-option-stats">
+            <div class="ads-option-stat">
+              <b>~50K</b>
+              <span><span data-lang-inline="es">Personas alcanzadas</span><span data-lang-inline="de" class="show">Erreichte Personen</span></span>
+            </div>
+            <div class="ads-option-stat">
+              <b>30-60</b>
+              <span><span data-lang-inline="es">Leads cualificados</span><span data-lang-inline="de" class="show">Qualifizierte Leads</span></span>
+            </div>
+            <div class="ads-option-stat">
+              <b>3-6</b>
+              <span><span data-lang-inline="es">Visitas finca</span><span data-lang-inline="de" class="show">Besichtigungen</span></span>
+            </div>
+          </div>
+          <p class="ads-option-desc">
+            <span data-lang="es">Cobertura mínima viable en mercado DACH. Adecuada si quieres probar antes de escalar.</span>
+            <span data-lang="de" class="show">Minimal tragfähige Reichweite im DACH-Markt. Geeignet, wenn du vor Skalierung testen möchtest.</span>
+          </p>
+        </div>
+
+        <!-- OPCIÓN RECOMENDADA -->
+        <div class="ads-option recommended">
+          <div class="ads-option-badge">
+            <span data-lang="es">★ Recomendada</span>
+            <span data-lang="de" class="show">★ Empfohlen</span>
+          </div>
+          <div class="ads-option-tag">
+            <span data-lang="es">Cobertura óptima</span>
+            <span data-lang="de" class="show">Optimale Reichweite</span>
+          </div>
+          <div class="ads-option-name">
+            <span data-lang="es">Óptima</span>
+            <span data-lang="de" class="show">Optimal</span>
+          </div>
+          <div class="ads-option-monthly">
+            €1.200<small><span data-lang-inline="es">/mes</span><span data-lang-inline="de" class="show">/Monat</span></small>
+          </div>
+          <div class="ads-option-total">
+            <span data-lang="es">€3.600 total · 3 meses</span>
+            <span data-lang="de" class="show">€3.600 gesamt · 3 Monate</span>
+          </div>
+          <div class="ads-option-stats">
+            <div class="ads-option-stat">
+              <b>~150K</b>
+              <span><span data-lang-inline="es">Personas alcanzadas</span><span data-lang-inline="de" class="show">Erreichte Personen</span></span>
+            </div>
+            <div class="ads-option-stat">
+              <b>120-180</b>
+              <span><span data-lang-inline="es">Leads cualificados</span><span data-lang-inline="de" class="show">Qualifizierte Leads</span></span>
+            </div>
+            <div class="ads-option-stat">
+              <b>12-20</b>
+              <span><span data-lang-inline="es">Visitas finca</span><span data-lang-inline="de" class="show">Besichtigungen</span></span>
+            </div>
+          </div>
+          <p class="ads-option-desc">
+            <span data-lang="es">Cobertura agresiva en DACH + UK. Más leads cualificados, más rotación de creatividades, más probabilidad real de cerrar.</span>
+            <span data-lang="de" class="show">Aggressive Reichweite in DACH + UK. Mehr qualifizierte Leads, mehr Kreativ-Rotation, höhere reale Abschlusswahrscheinlichkeit.</span>
+          </p>
+        </div>
+
+      </div>
+
+      <!-- EXPLICACIÓN: cómo impacta la inversión -->
+      <div class="ads-explainer">
+        <div class="ads-explainer-h">
+          <span data-lang="es">¿Cómo impacta la inversión en advertising en los resultados?</span>
+          <span data-lang="de" class="show">Wie wirkt sich das Advertising-Budget auf die Ergebnisse aus?</span>
+        </div>
+
+        <div class="ads-explainer-grid">
+
+          <div class="ads-explainer-item">
+            <div class="ads-explainer-num">i</div>
+            <h5><span data-lang="es">Coste por lead inmobiliario</span><span data-lang="de" class="show">Kosten pro Immobilien-Lead</span></h5>
+            <p>
+              <span data-lang="es">El benchmark mundial de Meta para sector inmobiliario es <b>~€16-30 por lead cualificado</b> (Facebook 2025, LocaliQ). Para finca de lujo en Mallorca dirigida a DACH, el rango sube a <b>€20-40 por lead</b> por menor competencia y CPM más alto.</span>
+              <span data-lang="de" class="show">Der globale Meta-Benchmark für Immobilien liegt bei <b>~€16-30 pro qualifiziertem Lead</b> (Facebook 2025, LocaliQ). Für Luxus-Finca auf Mallorca im DACH-Markt steigt es auf <b>€20-40 pro Lead</b> wegen geringerer Konkurrenz und höherem CPM.</span>
+            </p>
+          </div>
+
+          <div class="ads-explainer-item">
+            <div class="ads-explainer-num">ii</div>
+            <h5><span data-lang="es">Velocidad de respuesta = más visitas</span><span data-lang="de" class="show">Antwortgeschwindigkeit = mehr Besichtigungen</span></h5>
+            <p>
+              <span data-lang="es">De cada lead capturado, <b>~10-12%</b> se convierte en visita real cuando se responde en menos de 24h. Responder en menos de 5 minutos mejora la cualificación un <b>+78%</b> (AdAmigo 2026).</span>
+              <span data-lang="de" class="show">Von jedem erfassten Lead werden <b>~10-12%</b> zu echten Besichtigungen, wenn die Antwort in unter 24h erfolgt. Antwort in unter 5 Minuten verbessert die Qualifizierung um <b>+78%</b> (AdAmigo 2026).</span>
+            </p>
+          </div>
+
+          <div class="ads-explainer-item">
+            <div class="ads-explainer-num">iii</div>
+            <h5><span data-lang="es">Más inversión = más rotación creativa</span><span data-lang="de" class="show">Mehr Investition = mehr Kreativ-Rotation</span></h5>
+            <p>
+              <span data-lang="es">Con presupuesto óptimo se pueden hacer <b>pruebas A/B semanales</b>, descartar lo que no funciona y duplicar lo que sí. Con presupuesto mínimo, las creatividades se "queman" antes de poder optimizar.</span>
+              <span data-lang="de" class="show">Mit optimalem Budget kann man <b>wöchentliche A/B-Tests</b> machen, Erfolgloses verwerfen und Erfolgreiches verdoppeln. Mit Minimalbudget "verbrennen" sich Kreative vor der Optimierung.</span>
+            </p>
+          </div>
+
+          <div class="ads-explainer-item">
+            <div class="ads-explainer-num">iv</div>
+            <h5><span data-lang="es">Más alcance = más mercado</span><span data-lang="de" class="show">Mehr Reichweite = mehr Markt</span></h5>
+            <p>
+              <span data-lang="es">Con €500/mes alcanzamos solo el mercado DACH principal. Con €1.200/mes podemos extender a <b>UK + segmentos premium</b> (lookalike de compradores de propiedades de lujo) sin canibalizar audiencias.</span>
+              <span data-lang="de" class="show">Mit €500/Monat erreichen wir nur den DACH-Hauptmarkt. Mit €1.200/Monat können wir auf <b>UK + Premium-Segmente</b> ausweiten (Lookalike von Luxus-Immobilienkäufern) ohne Zielgruppen zu kannibalisieren.</span>
+            </p>
+          </div>
+
+        </div>
+
+        <div class="ads-sources">
+          <span data-lang="es"><b>Fuentes:</b> WordStream Facebook Ads Benchmarks 2025, LocaliQ Real Estate 2025, AdAmigo Meta Ads 2026. Los números son estimaciones basadas en benchmarks del sector — no garantizan resultados, dependen de calidad del material, velocidad de respuesta y temporada.</span>
+          <span data-lang="de" class="show"><b>Quellen:</b> WordStream Facebook Ads Benchmarks 2025, LocaliQ Real Estate 2025, AdAmigo Meta Ads 2026. Die Zahlen sind Schätzungen basierend auf Branchen-Benchmarks — keine Ergebnisgarantie, abhängig von Material-Qualität, Antwortgeschwindigkeit und Saison.</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRECIO AVANZADO -->
+  <section class="parte" style="border-bottom:none;padding-top:24px">
+    <div class="precio-block">
+      <div class="precio-grid">
+        <div class="precio-l">
+          <h4>
+            <span data-lang="es">Plan Essential · Resumen</span>
+            <span data-lang="de" class="show">Essential-Plan · Zusammenfassung</span>
+          </h4>
+          <h2>
+            <span data-lang="es">Web premium <em>+ campaña completa de 90 días.</em></span>
+            <span data-lang="de" class="show">Premium-Website <em>+ vollständige 90-Tage-Kampagne.</em></span>
+          </h2>
+          <p>
+            <span data-lang="es">Página 100% custom con storytelling completo, 20+ fotos, EN+DE. 3 reels, 5 publicaciones por mes, contenido para redes sociales. Estrategia en 3 momentos en mercados DACH+UK. Optimización semanal con pruebas A/B. Pago único.</span>
+            <span data-lang="de" class="show">100% Custom-Website mit komplettem Storytelling, 20+ Fotos, EN+DE. 3 Reels, 5 Posts pro Monat, Social-Media-Content. 3-Schritt-Strategie in DACH+UK-Märkten. Wöchentliche Optimierung mit A/B-Tests. Einmalzahlung.</span>
+          </p>
+        </div>
+        <div class="precio-r">
+          <div class="precio-line">
+            <div class="precio-line-l">
+              <div class="precio-line-label">
+                <span data-lang="es">Honorarios</span>
+                <span data-lang="de" class="show">Honorar</span>
+              </div>
+              <div class="precio-line-desc">
+                <span data-lang="es">Web premium + advertising · pago único</span>
+                <span data-lang="de" class="show">Premium-Website + Advertising · Einmalzahlung</span>
+              </div>
+            </div>
+            <div class="precio-line-num">€2.890</div>
+          </div>
+
+          <div class="precio-plus">+</div>
+
+          <div class="precio-line ads">
+            <div class="precio-line-l">
+              <div class="precio-line-label">
+                <span data-lang="es">Meta Ads</span>
+                <span data-lang="de" class="show">Meta Ads</span>
+              </div>
+              <div class="precio-line-desc">
+                <span data-lang="es">Desde €500/mes × 3 meses · pago directo a Meta</span>
+                <span data-lang="de" class="show">Ab €500/Monat × 3 Monate · Direktzahlung an Meta</span>
+              </div>
+            </div>
+            <div class="precio-line-num">desde €1.500</div>
+          </div>
+
+          <div class="precio-total-box">
+            <div class="precio-total-label">
+              <span data-lang="es">Total</span>
+              <span data-lang="de" class="show">Gesamt</span>
+            </div>
+            <div class="precio-total-num">desde €4.390</div>
+          </div>
+
+          <div class="precio-note">
+            <span data-lang="es">Pago: 50% inicio + 50% mes 2 · IVA no incluido</span>
+            <span data-lang="de" class="show">Zahlung: 50% Beginn + 50% Monat 2 · ohne USt.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- ====================== PLAN SIGNATURE ============================= -->
+<!-- =================================================================== -->
+<div class="plan-view" id="view-signature">
+
+  <!-- HERO SIGNATURE -->
+  <section class="parte" style="border-bottom:none;padding-top:24px">
+    <div class="signature-hero">
+      <div class="signature-star">★ ★ ★</div>
+      <div class="signature-tag">
+        <span data-lang="es">Por invitación · Plan Signature</span>
+        <span data-lang="de" class="show">Auf Einladung · Signature-Plan</span>
+      </div>
+      <h2>
+        <span data-lang="es">Vendemos la finca <em>en persona.</em></span>
+        <span data-lang="de" class="show">Wir verkaufen die Finca <em>persönlich.</em></span>
+      </h2>
+      <p>
+        <span data-lang="es">El plan donde Sofía y yo viajamos a Mallorca, vivimos en la finca durante 5 días, y producimos la campaña con cámaras profesionales, drone, fotografía editorial y dirección creativa in-situ. Cay no produce contenido. Lo crean los autores.</span>
+        <span data-lang="de" class="show">Der Plan, bei dem Sofía und ich nach Mallorca reisen, 5 Tage in der Finca leben und die Kampagne mit Profikameras, Drohne, Editorial-Fotografie und kreativer Leitung vor Ort produzieren. Cay produziert keinen Content. Die Autoren erschaffen ihn.</span>
+      </p>
+
+      <div class="signature-impact">
+        <div class="signature-impact-label">
+          <span data-lang="es">Aumento estimado en probabilidad de venta</span>
+          <span data-lang="de" class="show">Geschätzte Steigerung der Verkaufswahrscheinlichkeit</span>
+        </div>
+        <div class="signature-impact-num">+85%</div>
+        <div class="signature-impact-desc">
+          <span data-lang="es">vs. Avanzado · Probabilidad de cerrar venta en 90 días pasa del <b>~60%</b> al <b>~90-95%</b>. Material premium genera <b>3-4x más engagement</b>, leads <b>2x más cualificados</b>, y un activo digital con valor permanente.</span>
+          <span data-lang="de" class="show">vs. Advanced · Verkaufswahrscheinlichkeit in 90 Tagen steigt von <b>~60%</b> auf <b>~90-95%</b>. Premium-Material erzeugt <b>3-4x mehr Engagement</b>, <b>2x qualifiziertere Leads</b>, und ein digitales Asset mit dauerhaftem Wert.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DELIVERABLES SIGNATURE -->
+  <div class="signature-deliverables">
+
+    <div class="sig-block">
+      <div class="sig-block-icon">i</div>
+      <div class="sig-block-tag">
+        <span data-lang="es">Producción audiovisual</span>
+        <span data-lang="de" class="show">Audiovisuelle Produktion</span>
+      </div>
+      <h3>
+        <span data-lang="es">Cine, no <em>contenido.</em></span>
+        <span data-lang="de" class="show">Kino, nicht <em>Content.</em></span>
+      </h3>
+      <ul>
+        <li><span data-lang="es"><b>Mini-documental</b> 3-5 min sobre Cay y la finca</span><span data-lang="de" class="show"><b>Mini-Doku</b> 3-5 Min über Cay und die Finca</span></li>
+        <li><span data-lang="es"><b>Video tour cinematográfico</b> 90 segundos</span><span data-lang="de" class="show"><b>Kinematischer Video-Rundgang</b> 90 Sekunden</span></li>
+        <li><span data-lang="es"><b>10 reels</b> editorial de 30s · EN + DE = 20 versiones</span><span data-lang="de" class="show"><b>10 Reels</b> Editorial 30s · EN + DE = 20 Versionen</span></li>
+        <li><span data-lang="es">Tomas con <b>drone profesional</b> (DJI Mavic 3 Pro)</span><span data-lang="de" class="show">Aufnahmen mit <b>Profi-Drohne</b> (DJI Mavic 3 Pro)</span></li>
+        <li><span data-lang="es"><b>Tour 360° Matterport</b> navegable</span><span data-lang="de" class="show">Begehbarer <b>Matterport 360°-Tour</b></span></li>
+        <li><span data-lang="es">Color grading cinematográfico · sonido profesional</span><span data-lang="de" class="show">Kinematisches Color Grading · Profi-Sound</span></li>
+        <li><span data-lang="es"><b>Voz original de Cay</b> grabada en estudio</span><span data-lang="de" class="show"><b>Originalstimme von Cay</b> im Studio aufgenommen</span></li>
+      </ul>
+    </div>
+
+    <div class="sig-block">
+      <div class="sig-block-icon">ii</div>
+      <div class="sig-block-tag">
+        <span data-lang="es">Fotografía editorial</span>
+        <span data-lang="de" class="show">Editorial-Fotografie</span>
+      </div>
+      <h3>
+        <span data-lang="es">Calidad de <em>revista AD.</em></span>
+        <span data-lang="de" class="show"><em>AD-Magazin</em>-Qualität.</span>
+      </h3>
+      <ul>
+        <li><span data-lang="es"><b>80+ fotos</b> profesionales editadas</span><span data-lang="de" class="show"><b>80+ professionelle Fotos</b> bearbeitet</span></li>
+        <li><span data-lang="es">Sesión <b>amanecer + golden hour + nocturna</b></span><span data-lang="de" class="show">Session <b>Sonnenaufgang + Golden Hour + Nacht</b></span></li>
+        <li><span data-lang="es">Detalles arquitectónicos macro · materiales · texturas</span><span data-lang="de" class="show">Architektonische Makrodetails · Materialien · Texturen</span></li>
+        <li><span data-lang="es">Lifestyle staging con dirección de arte</span><span data-lang="de" class="show">Lifestyle-Staging mit Art Direction</span></li>
+        <li><span data-lang="es">Retoque editorial nivel publicación</span><span data-lang="de" class="show">Editorial-Retusche auf Publikationsniveau</span></li>
+        <li><span data-lang="es">Material apto para <b>AD, Schöner Wohnen, Architectural Digest</b></span><span data-lang="de" class="show">Material geeignet für <b>AD, Schöner Wohnen, Architectural Digest</b></span></li>
+      </ul>
+    </div>
+
+    <div class="sig-block">
+      <div class="sig-block-icon">iii</div>
+      <div class="sig-block-tag">
+        <span data-lang="es">Web premium plus</span>
+        <span data-lang="de" class="show">Premium Plus-Website</span>
+      </div>
+      <h3>
+        <span data-lang="es">Sitio web <em>de autor.</em></span>
+        <span data-lang="de" class="show">Autoren-<em>Website.</em></span>
+      </h3>
+      <ul>
+        <li><span data-lang="es">Diseño premium plus con <b>parallax y scroll cinematográfico</b></span><span data-lang="de" class="show">Premium-Plus-Design mit <b>Parallax und Cinematic Scroll</b></span></li>
+        <li><span data-lang="es"><b>3 idiomas</b>: EN + DE + ES</span><span data-lang="de" class="show"><b>3 Sprachen</b>: EN + DE + ES</span></li>
+        <li><span data-lang="es">Hero con video documental autoplay</span><span data-lang="de" class="show">Hero mit Autoplay-Doku-Video</span></li>
+        <li><span data-lang="es">Tour 360° integrado nativamente</span><span data-lang="de" class="show">360°-Tour nativ integriert</span></li>
+        <li><span data-lang="es"><b>Dossier impreso</b> 24 páginas + planos arquitectónicos</span><span data-lang="de" class="show"><b>Gedrucktes Exposé</b> 24 Seiten + Pläne</span></li>
+        <li><span data-lang="es">Versión PDF para descarga + envío físico premium</span><span data-lang="de" class="show">PDF-Version + physischer Premium-Versand</span></li>
+        <li><span data-lang="es">Stack completo: Pixel, GA4, GTM, Conversions API, CRM premium</span><span data-lang="de" class="show">Kompletter Stack: Pixel, GA4, GTM, Conversions API, Premium-CRM</span></li>
+      </ul>
+    </div>
+
+    <div class="sig-block">
+      <div class="sig-block-icon">iv</div>
+      <div class="sig-block-tag">
+        <span data-lang="es">Estrategia & advertising</span>
+        <span data-lang="de" class="show">Strategie & Advertising</span>
+      </div>
+      <h3>
+        <span data-lang="es">Campaña <em>multicanal global.</em></span>
+        <span data-lang="de" class="show">Globale <em>Multichannel-Kampagne.</em></span>
+      </h3>
+      <ul>
+        <li><span data-lang="es">Embudo TOFU + MOFU + BOFU optimizado <b>diariamente</b></span><span data-lang="de" class="show">TOFU + MOFU + BOFU-Funnel <b>täglich</b> optimiert</span></li>
+        <li><span data-lang="es">Mercados: <b>DACH + UK + Nordics + Benelux + USA</b></span><span data-lang="de" class="show">Märkte: <b>DACH + UK + Nordics + Benelux + USA</b></span></li>
+        <li><span data-lang="es">Meta + YouTube + LinkedIn + TikTok</span><span data-lang="de" class="show">Meta + YouTube + LinkedIn + TikTok</span></li>
+        <li><span data-lang="es"><b>PR digital</b> outreach a medios de lujo y arquitectura</span><span data-lang="de" class="show"><b>Digital-PR</b> Outreach an Luxus- und Architekturmedien</span></li>
+        <li><span data-lang="es">Listing premium en <b>Sotheby's, Engel & Völkers, James Edition</b></span><span data-lang="de" class="show">Premium-Listing bei <b>Sotheby's, Engel & Völkers, James Edition</b></span></li>
+        <li><span data-lang="es">A/B testing diario · 30+ creatividades en rotación</span><span data-lang="de" class="show">Tägliches A/B-Testing · 30+ Kreative in Rotation</span></li>
+        <li><span data-lang="es">Reportes <b>semanales</b> con call estratégica</span><span data-lang="de" class="show"><b>Wöchentliche</b> Berichte mit strategischem Call</span></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- VIAJE A MALLORCA -->
+  <section class="parte" style="padding-top:0;border-bottom:none">
+    <div class="signature-trip">
+      <div class="signature-trip-tag">
+        <span data-lang="es">★ Producción in-situ</span>
+        <span data-lang="de" class="show">★ In-situ Produktion</span>
+      </div>
+      <h3>
+        <span data-lang="es">5 días en Mallorca. <em>Un equipo creativo en tu finca.</em></span>
+        <span data-lang="de" class="show">5 Tage auf Mallorca. <em>Ein Kreativ-Team auf deiner Finca.</em></span>
+      </h3>
+      <p>
+        <span data-lang="es">Sofía y yo viajamos a Andratx con todo el equipo profesional. Vivimos en la finca, capturamos cada hora del día, dirigimos la narrativa, entrevistamos a Cay, y producimos toda la campaña con la propiedad como protagonista real. No es una visita. Es una residencia creativa.</span>
+        <span data-lang="de" class="show">Sofía und ich reisen mit kompletter Profi-Ausrüstung nach Andratx. Wir leben in der Finca, fangen jede Tageszeit ein, leiten das Narrativ, interviewen Cay und produzieren die gesamte Kampagne mit der Immobilie als echter Protagonistin. Es ist kein Besuch. Es ist eine Kreativ-Residenz.</span>
+      </p>
+      <div class="signature-trip-grid">
+        <div class="signature-trip-item">
+          <b><span data-lang="es">Día 1-2 · Inmersión</span><span data-lang="de" class="show">Tag 1-2 · Eintauchen</span></b>
+          <span><span data-lang="es">Llegada, scouting, entrevista profunda con Cay, bocetado del storyboard, plan de producción.</span><span data-lang="de" class="show">Anreise, Scouting, tiefes Interview mit Cay, Storyboard-Skizzen, Produktionsplan.</span></span>
+        </div>
+        <div class="signature-trip-item">
+          <b><span data-lang="es">Día 3 · Captura amanecer</span><span data-lang="de" class="show">Tag 3 · Sonnenaufgang</span></b>
+          <span><span data-lang="es">Drone aéreo, golden hour mañana, exteriores, detalles arquitectónicos, Cay trabajando.</span><span data-lang="de" class="show">Drohnen-Aufnahmen, Morgens-Golden-Hour, Außen, Architekturdetails, Cay bei der Arbeit.</span></span>
+        </div>
+        <div class="signature-trip-item">
+          <b><span data-lang="es">Día 4 · Interiores</span><span data-lang="de" class="show">Tag 4 · Interieur</span></b>
+          <span><span data-lang="es">Lifestyle staging, fotografía editorial de cada espacio, video tour, entrevista a cámara.</span><span data-lang="de" class="show">Lifestyle-Staging, Editorial-Fotografie jedes Raums, Video-Tour, Kamerainterview.</span></span>
+        </div>
+        <div class="signature-trip-item">
+          <b><span data-lang="es">Día 5 · Nocturna + cierre</span><span data-lang="de" class="show">Tag 5 · Nacht + Abschluss</span></b>
+          <span><span data-lang="es">Tomas nocturnas, hora azul, fuego encendido, detalles atmosféricos, wrap creativo.</span><span data-lang="de" class="show">Nachtaufnahmen, Blaue Stunde, Kaminfeuer, Atmosphäre, Kreativ-Abschluss.</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTADOS PROYECTADOS -->
+  <section class="parte" style="padding-top:0;border-bottom:none">
+    <div class="signature-results">
+      <div class="signature-results-tag">
+        <span data-lang="es">Proyección a 90 días</span>
+        <span data-lang="de" class="show">90-Tage-Prognose</span>
+      </div>
+      <h3>
+        <span data-lang="es">El impacto <em>real en números.</em></span>
+        <span data-lang="de" class="show">Der echte <em>Impact in Zahlen.</em></span>
+      </h3>
+
+      <div class="signature-results-grid">
+        <div class="signature-results-item">
+          <b>250.000+</b>
+          <small><span data-lang="es">Alcance · 7x vs Avanzado</span><span data-lang="de" class="show">Reichweite · 7x vs Advanced</span></small>
+        </div>
+        <div class="signature-results-item">
+          <b>15.000+</b>
+          <small><span data-lang="es">Visitas web</span><span data-lang="de" class="show">Web-Besuche</span></small>
+        </div>
+        <div class="signature-results-item">
+          <b>250-400</b>
+          <small><span data-lang="es">Leads cualificados</span><span data-lang="de" class="show">Qualifizierte Leads</span></small>
+        </div>
+        <div class="signature-results-item">
+          <b>20-35</b>
+          <small><span data-lang="es">Visitas a la finca</span><span data-lang="de" class="show">Finca-Besichtigungen</span></small>
+        </div>
+      </div>
+
+      <p style="font-size:13px;color:var(--gris-cl);max-width:600px;margin:0 auto;line-height:1.6">
+        <span data-lang="es">Probabilidad de cerrar la venta en 90 días: <b style="color:var(--dorado);font-family:var(--serif);font-style:italic;font-size:16px">~90-95%</b></span>
+        <span data-lang="de" class="show">Wahrscheinlichkeit, in 90 Tagen abzuschließen: <b style="color:var(--dorado);font-family:var(--serif);font-style:italic;font-size:16px">~90-95%</b></span>
+      </p>
+    </div>
+  </section>
+
+  <!-- PRECIO ON DEMAND -->
+  <section class="parte" style="padding-top:0;border-bottom:none">
+    <div class="signature-pricing">
+      <div class="signature-pricing-tag">
+        <span data-lang="es">★ Inversión bespoke</span>
+        <span data-lang="de" class="show">★ Bespoke-Investition</span>
+      </div>
+      <h3>
+        <span data-lang="es">Una propuesta <em>a medida.</em></span>
+        <span data-lang="de" class="show">Ein maßgeschneidertes <em>Angebot.</em></span>
+      </h3>
+      <p>
+        <span data-lang="es">El plan Signature se cotiza por proyecto, no por catálogo. Incluye honorarios creativos, viaje, alojamiento, equipo de producción profesional, advertising multicanal y PR. Hablamos contigo, evaluamos la finca y te enviamos una propuesta detallada en 48 horas.</span>
+        <span data-lang="de" class="show">Der Signature-Plan wird projektbezogen kalkuliert, nicht aus dem Katalog. Beinhaltet Kreativ-Honorar, Reise, Unterkunft, Profi-Produktionsteam, Multichannel-Advertising und PR. Wir sprechen mit dir, evaluieren die Finca und senden dir innerhalb von 48 Stunden ein detailliertes Angebot.</span>
+      </p>
+      <a class="signature-pricing-cta" href="#cta">
+        <span data-lang="es">Solicitar propuesta Signature</span>
+        <span data-lang="de" class="show">Signature-Angebot anfordern</span>
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<!-- CTA FINAL -->
+<div class="cta-final">
+  <h2>
+    <span data-lang="es">Hablemos <em>de tu finca.</em></span>
+    <span data-lang="de" class="show">Sprechen wir <em>über deine Finca.</em></span>
+  </h2>
+  <p>
+    <span data-lang="es">Hablamos 30 minutos sin compromiso. Te ayudo a decidir según tu plazo y prioridades.</span>
+    <span data-lang="de" class="show">Wir reden 30 Minuten unverbindlich. Ich helfe dir bei der Entscheidung — nach deinem Zeitplan und deinen Prioritäten.</span>
+  </p>
+  <div class="cta-final-btns">
+    <a class="btn-pri" href="#">
+      <span data-lang="es">Agendar llamada</span>
+      <span data-lang="de" class="show">Termin vereinbaren</span>
+    </a>
+    <a class="btn-sec" href="#">WhatsApp</a>
+  </div>
+</div>
+
+<footer>
+  <span style="color:var(--dorado);letter-spacing:2.5px;font-weight:600">díaz.co</span> · Digital · Web · Brand · Cay · 2026
+</footer>
+
+<script>
+function setLang(lang, btn){
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.documentElement.setAttribute('lang', lang);
+  document.querySelectorAll('[data-lang]').forEach(el=>{
+    if(el.getAttribute('data-lang')===lang){el.classList.add('show')}
+    else{el.classList.remove('show')}
+  });
+  document.querySelectorAll('[data-lang-inline]').forEach(el=>{
+    if(el.getAttribute('data-lang-inline')===lang){el.classList.add('show')}
+    else{el.classList.remove('show')}
+  });
+}
+
+function setPlan(plan, btn){
+  document.querySelectorAll('.plan-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.plan-view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+plan).classList.add('active');
+
+  // Limpiar todos los temas
+  document.body.classList.remove('theme-premium','theme-signature');
+
+  // Activar tema según el plan
+  if(plan === 'profesional'){
+    document.body.classList.add('theme-premium');
+  } else if(plan === 'signature'){
+    document.body.classList.add('theme-signature');
+  }
+
+  // Scroll suave al inicio
+  setTimeout(()=>{
+    document.getElementById('parte1')?.scrollIntoView({behavior:'smooth',block:'start'});
+  }, 100);
+}
+
+// Activar tema premium por defecto al cargar (Essential es el plan por defecto)
+window.addEventListener('DOMContentLoaded',()=>{
+  document.body.classList.add('theme-premium');
+});
+
+</script>
+
+</body>
+</html>
